@@ -276,17 +276,23 @@ async function blockscoutEvidence(explorerUrl, address, totalSupply) {
 }
 
 async function probeToken(client, address) {
-  const [name, symbol, decimals, totalSupply, owner, paused] = await Promise.all([
+  const [name, symbol, decimals, totalSupply, owner, paused, supports721, supports1155] = await Promise.all([
     safeRead(client, { address, abi: ERC20_PROBE_ABI, functionName: 'name' }),
     safeRead(client, { address, abi: ERC20_PROBE_ABI, functionName: 'symbol' }),
     safeRead(client, { address, abi: ERC20_PROBE_ABI, functionName: 'decimals' }),
     safeRead(client, { address, abi: ERC20_PROBE_ABI, functionName: 'totalSupply' }),
     safeRead(client, { address, abi: ERC20_PROBE_ABI, functionName: 'owner' }),
-    safeRead(client, { address, abi: ERC20_PROBE_ABI, functionName: 'paused' })
+    safeRead(client, { address, abi: ERC20_PROBE_ABI, functionName: 'paused' }),
+    safeRead(client, { address, abi: parseAbi(['function supportsInterface(bytes4) view returns (bool)']), functionName: 'supportsInterface', args: ['0x80ac58cd'] }),
+    safeRead(client, { address, abi: parseAbi(['function supportsInterface(bytes4) view returns (bool)']), functionName: 'supportsInterface', args: ['0xd9b67a26'] })
   ])
   const tokenLike = typeof symbol === 'string' && typeof decimals === 'number' && typeof totalSupply === 'bigint'
+  const isNFT = supports721 === true || supports1155 === true
+  const tokenKind = isNFT ? 'nft' : tokenLike ? 'erc20' : null
   return {
-    tokenLike,
+    tokenLike: tokenLike || isNFT,
+    tokenKind,
+    isNFT,
     name: sanitizeText(name, 96),
     symbol: sanitizeText(symbol, 32),
     decimals: typeof decimals === 'number' ? decimals : null,
