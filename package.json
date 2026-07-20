@@ -58,10 +58,10 @@
   },
   "devDependencies": {
     "ganache": "^7.9.2",
-    "solc": "^0.8.30"
+    "solc": "^0.8.36"
   },
   "dependencies": {
-    "viem": "^2.55.2"
+    "viem": "^2.55.4"
   },
   "engines": {
     "node": ">=22.12 <23",
