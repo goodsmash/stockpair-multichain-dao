@@ -1,0 +1,18 @@
+{
+  "chainId": 4663,
+  "rpcUrl": "USE_A_DEDICATED_PROVIDER_ENDPOINT",
+  "owner": "MULTISIG_REQUIRED",
+  "guardian": "SEPARATE_GUARDIAN_REQUIRED",
+  "eligibilityGate": "COMPLIANCE_PROVIDER_REQUIRED",
+  "sequencerUptimeFeed": "VERIFY_WITH_CHAINLINK_AND_ROBINHOOD",
+  "sequencerGraceSeconds": 3600,
+  "stockToken": "VERIFY_IN_OFFICIAL_ROBINHOOD_TOKEN_DIRECTORY",
+  "stockPriceFeed": "VERIFY_IN_OFFICIAL_ROBINHOOD_TOKEN_DIRECTORY",
+  "stockTicker": "VERIFY",
+  "maxOracleAgeSeconds": 345600,
+  "requireFreshOracleForSwaps": false,
+  "complianceEnforced": true,
+  "deploymentAllowed": false,
+  "notes": "Template only. Mainnet deployment is blocked from the supplied scripts until audit, legal approval, address verification, multisig drills, and a launch decision record are complete.",
+  "minInitialStockValueUsd18": "SET_AN_APPROVED_POSITIVE_18_DECIMAL_USD_THRESHOLD"
+}

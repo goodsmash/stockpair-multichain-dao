@@ -1,0 +1,22 @@
+{
+  "name": "@stockpair/robinhood-chain-kit",
+  "version": "0.9.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "bin",
+    "README.md"
+  ],
+  "bin": {
+    "stockpair-robinhood": "./bin/stockpair-robinhood.mjs"
+  },
+  "engines": {
+    "node": ">=22.12 <23"
+  }
+}

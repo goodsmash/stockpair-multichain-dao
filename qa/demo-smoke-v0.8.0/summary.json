@@ -1,0 +1,29 @@
+{
+  "appVersion": "0.8.0",
+  "protocolVersion": "0.6.0",
+  "checkedAt": "2026-07-19T19:44:47.440Z",
+  "localChainId": 31337,
+  "healthOk": true,
+  "apiVersion": "0.8.0",
+  "capabilityVersion": "0.8.0",
+  "modules": 8,
+  "safety": {
+    "readOnly": true,
+    "signingKeysAccepted": false,
+    "transactionBroadcasting": false,
+    "autoExecutionAllowed": false
+  },
+  "knownRobinhoodNetwork": false,
+  "unknownLocalChainFailsClosed": true,
+  "contractsKnown": false,
+  "aaNetworkAvailable": false,
+  "gasPriceWei": "2000000000",
+  "nodeAutoUpgradeAllowed": false,
+  "uiHttp": true,
+  "cliReadOnly": true,
+  "notes": [
+    "Local chain 31337 is intentionally absent from the reviewed Robinhood registry.",
+    "Native endpoints remain available but fail closed for network-specific plans.",
+    "No signing or broadcasting was exercised."
+  ]
+}

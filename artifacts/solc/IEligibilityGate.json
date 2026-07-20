@@ -1,0 +1,94 @@
+{
+  "contractName": "IEligibilityGate",
+  "sourceName": "src/interfaces/IEligibilityGate.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "isEligible",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "isEligible",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/interfaces/IEligibilityGate.sol": "IEligibilityGate"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/interfaces/IEligibilityGate.sol": {
+        "keccak256": "0x505e34e65d9ba5b618d3771a8d9583b648c877baa777ced099807d19b366af72",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://1ff14c30778c818eb85bf53d339c7447210406c7ca4cd52ccc18cd9c22307aea",
+          "dweb:/ipfs/QmNZQ2doAybqPWdqhoG6GCERg3oY2pzDmDhUFtuL25yVTd"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

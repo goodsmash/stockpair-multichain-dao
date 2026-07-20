@@ -1,0 +1,1075 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "StockPair Robinhood Chain Intelligence API",
+    "version": "0.9.0",
+    "description": "Read-only multi-chain contract, token, DEX, wallet, DAO/governance and Robinhood-native intelligence APIs. This API never accepts private keys, signs, broadcasts, claims token safety, or authorizes governance or treasury recovery."
+  },
+  "servers": [
+    {
+      "url": "https://indexer.example.com",
+      "description": "Production indexer"
+    },
+    {
+      "url": "http://127.0.0.1:8787",
+      "description": "Disposable local demo"
+    }
+  ],
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Service and chain health",
+        "responses": {
+          "200": {
+            "description": "Healthy or degraded service state",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/radar/sources": {
+      "get": {
+        "summary": "List built-in launch-source adapter descriptors",
+        "responses": {
+          "200": {
+            "description": "Adapter descriptors",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/radar/candidates": {
+      "get": {
+        "summary": "Rank normalized launch candidates",
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          },
+          {
+            "name": "stage",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "detected",
+                "curve",
+                "pooled",
+                "graduated",
+                "active"
+              ]
+            }
+          },
+          {
+            "name": "minScore",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "maxRiskScore",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 160
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ranked candidates",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "generatedAt",
+                    "count",
+                    "total",
+                    "policy",
+                    "candidates"
+                  ],
+                  "properties": {
+                    "generatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "count": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    },
+                    "policy": {
+                      "type": "object"
+                    },
+                    "candidates": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/LaunchCandidate"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/radar/alerts": {
+      "get": {
+        "summary": "Evaluate configured alert rules against the current radar snapshot",
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matched rules and candidates",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/summary": {
+      "get": {
+        "summary": "Scout coverage and counts",
+        "responses": {
+          "200": {
+            "description": "Coverage summary",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/tokens": {
+      "get": {
+        "summary": "Raw detected ERC-20-like contracts",
+        "responses": {
+          "200": {
+            "description": "Detected tokens",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/stream": {
+      "get": {
+        "summary": "Server-sent Scout event stream",
+        "responses": {
+          "200": {
+            "description": "text/event-stream",
+            "content": {
+              "text/event-stream": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/capabilities": {
+      "get": {
+        "summary": "List Robinhood-native modules and fail-closed safety posture",
+        "responses": {
+          "200": {
+            "description": "List Robinhood-native modules and fail-closed safety posture",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/network": {
+      "get": {
+        "summary": "Return the reviewed Robinhood network profile and configured RPC posture",
+        "responses": {
+          "200": {
+            "description": "Return the reviewed Robinhood network profile and configured RPC posture",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/contracts": {
+      "get": {
+        "summary": "Return reviewed L1/L2 protocol contracts, precompiles and core tokens",
+        "responses": {
+          "200": {
+            "description": "Return reviewed L1/L2 protocol contracts, precompiles and core tokens",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/account-abstraction": {
+      "get": {
+        "summary": "Return EntryPoint generations, EIP-7702 support and a disabled-by-default bounded policy",
+        "responses": {
+          "200": {
+            "description": "Return EntryPoint generations, EIP-7702 support and a disabled-by-default bounded policy",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/gas": {
+      "get": {
+        "summary": "Return current gas price plus Nitro L2/L1 data-fee guidance",
+        "responses": {
+          "200": {
+            "description": "Return current gas price plus Nitro L2/L1 data-fee guidance",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/node": {
+      "get": {
+        "summary": "Return documented Nitro, ArbOS, sequencer-feed and node-resource posture",
+        "responses": {
+          "200": {
+            "description": "Return documented Nitro, ArbOS, sequencer-feed and node-resource posture",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/finality": {
+      "get": {
+        "summary": "Conservatively assess a transaction using the provider finalized tag",
+        "parameters": [
+          {
+            "name": "transactionHash",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{64}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Finality model and optional transaction status",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/stock-token/{address}": {
+      "get": {
+        "summary": "Inspect ERC-8056 corporate-action state and fail-closed oracle/sequencer safety",
+        "parameters": [
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          },
+          {
+            "name": "feed",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          },
+          {
+            "name": "sequencerFeed",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          },
+          {
+            "name": "wallet",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          },
+          {
+            "name": "heartbeatSeconds",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 604800
+            }
+          },
+          {
+            "name": "gracePeriodSeconds",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 86400,
+              "default": 3600
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sanitized stock-token, corporate-action, oracle, sequencer and execution assessment",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/messaging-plan": {
+      "get": {
+        "summary": "Generate an unsigned canonical L1\u2194L2 message plan",
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "enum": [
+                "l1-to-l2",
+                "l2-to-l1"
+              ]
+            }
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          },
+          {
+            "name": "data",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x(?:[0-9a-fA-F]{2})*$"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          },
+          {
+            "name": "l2CallValue",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-9]+$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Unsigned, user-signature-required retryable or Outbox plan",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/robinhood/bridge-plan": {
+      "get": {
+        "summary": "Generate an unsigned canonical asset-bridge plan",
+        "parameters": [
+          {
+            "name": "direction",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "enum": [
+                "l1-to-l2",
+                "l2-to-l1"
+              ]
+            }
+          },
+          {
+            "name": "token",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Canonical gateway plan with timing and blockers",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/radar/deployer-reputation": {
+      "get": {
+        "summary": "Return bounded, evidence-limited deployer reputation",
+        "responses": {
+          "200": {
+            "description": "Read-only evidence response",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid bounded query",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          },
+          "404": {
+            "description": "Evidence unavailable",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "address",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          }
+        ]
+      }
+    },
+    "/api/radar/manipulation": {
+      "get": {
+        "summary": "Return heuristic pool-flow manipulation warnings",
+        "responses": {
+          "200": {
+            "description": "Read-only evidence response",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid bounded query",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          },
+          "404": {
+            "description": "Evidence unavailable",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "pool",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          }
+        ]
+      }
+    },
+    "/api/alerts/status": {
+      "get": {
+        "summary": "Return outbound alert-delivery status without secrets",
+        "responses": {
+          "200": {
+            "description": "Queue and target status",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid bounded query",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          },
+          "404": {
+            "description": "Evidence unavailable",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/contracts": {
+      "get": {
+        "summary": "Confirmed contract creations",
+        "responses": {
+          "200": {
+            "description": "Bounded confirmed deployment evidence",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/pools": {
+      "get": {
+        "summary": "Observed V2/V3 pools and live state",
+        "responses": {
+          "200": {
+            "description": "Pool creation evidence with direct reserve or liquidity snapshots",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/swaps": {
+      "get": {
+        "summary": "Observed pool swap events",
+        "responses": {
+          "200": {
+            "description": "Bounded raw swap evidence",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/pending": {
+      "get": {
+        "summary": "Best-effort pending contract creations",
+        "responses": {
+          "200": {
+            "description": "Pending provider evidence that may be replaced or dropped",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/wallet-activity": {
+      "get": {
+        "summary": "Publicly configured wallet activity",
+        "responses": {
+          "200": {
+            "description": "Activity for operator-configured public watch addresses",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/events": {
+      "get": {
+        "summary": "Bounded Scout event history",
+        "responses": {
+          "200": {
+            "description": "Recent normalized Scout events",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/labels": {
+      "get": {
+        "summary": "Public label and wallet-watch metadata",
+        "responses": {
+          "200": {
+            "description": "Public evidence sources and watch-entry counts",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scan/{token}": {
+      "get": {
+        "summary": "Evidence-enriched token scan",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Static, explorer, liquidity, deployer and flow evidence without a safety guarantee",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/chains": {
+      "get": {
+        "summary": "Configured chain health and index coverage",
+        "responses": {
+          "200": {
+            "description": "Per-chain head, confirmation lag, RPC latency, stall status and checkpoint coverage",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/daos": {
+      "get": {
+        "summary": "Governance-like and dormant-candidate contract feed",
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "unknown",
+                "too-new",
+                "active-evidence",
+                "watch",
+                "dormant-candidate"
+              ]
+            }
+          },
+          {
+            "name": "role",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "maxLength": 80
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Selector, probe, activity and dormancy evidence without ownership or recoverability claims",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/dao/{chainId}/{address}": {
+      "get": {
+        "summary": "Read one indexed DAO/governance candidate",
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indexed DAO evidence",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          },
+          "404": {
+            "description": "DAO candidate not indexed",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/scout/scan/{chainId}/{address}": {
+      "get": {
+        "summary": "Live read-only scan on any configured EVM chain",
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "address",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^0x[0-9a-fA-F]{40}$"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Runtime, proxy, token, source, holder, activity, liquidity, governance and manual-review evidence",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/radar/opportunities": {
+      "get": {
+        "summary": "Manual evidence-review opportunity queues",
+        "parameters": [
+          {
+            "name": "chainId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Buy-review, waiting-for-evidence and exit-review queues; autonomous execution is disabled",
+            "headers": {
+              "X-StockPair-API-Version": {
+                "$ref": "#/components/headers/StockPairApiVersion"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "LaunchCandidate": {
+        "type": "object",
+        "required": [
+          "id",
+          "chainId",
+          "tokenAddress",
+          "risk",
+          "scores",
+          "execution"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "chainId": {
+            "type": "integer"
+          },
+          "tokenAddress": {
+            "type": "string",
+            "pattern": "^0x[0-9a-fA-F]{40}$"
+          },
+          "stage": {
+            "type": "string"
+          },
+          "risk": {
+            "type": "object"
+          },
+          "scores": {
+            "type": "object"
+          },
+          "execution": {
+            "type": "object",
+            "properties": {
+              "eligibleForReview": {
+                "type": "boolean"
+              },
+              "autoExecutionAllowed": {
+                "const": false
+              },
+              "blockers": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "requiredNextSteps": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "headers": {
+      "StockPairApiVersion": {
+        "description": "Exact API compatibility version required by StockPair v0.9 clients.",
+        "schema": {
+          "type": "string",
+          "const": "0.9.0"
+        }
+      }
+    }
+  }
+}

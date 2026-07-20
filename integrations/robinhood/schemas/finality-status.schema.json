@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/finality-status.schema.json",
+  "title": "Conservative Robinhood transaction finality status",
+  "type": "object",
+  "required": ["model", "transaction"],
+  "properties": {
+    "model": { "type": "object" },
+    "transaction": {
+      "type": "object",
+      "required": ["status", "safeForHighValue"],
+      "properties": {
+        "status": { "enum": ["not-requested", "not-found", "reverted", "soft-confirmed", "ethereum-finalized", "unknown"] },
+        "safeForHighValue": { "type": "boolean" }
+      }
+    }
+  }
+}

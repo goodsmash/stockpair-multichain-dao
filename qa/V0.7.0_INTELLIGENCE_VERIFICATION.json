@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 1,
+  "release": "StockPair App v0.7.0 launch intelligence and agent integration pack",
+  "protocolRelease": "StockPair Protocol v0.6.0 (unchanged)",
+  "status": "PASS_WITH_EXTERNAL_IMPLEMENTATION_GATES",
+  "generatedAt": "2026-07-19T19:00:39.495400+00:00",
+  "scope": {
+    "contractSourceChanged": false,
+    "contractEvmMatrixRerun": false,
+    "inheritedProtocolEvidence": "RELEASE_VERIFICATION.json and qa/verification-logs-v0.6.0/",
+    "newCode": [
+      "services/indexer/src/intelligence/",
+      "packages/launch-intelligence-sdk/",
+      "integrations/",
+      "v0.7 docs and tests"
+    ]
+  },
+  "checks": [
+    {
+      "name": "Launch intelligence, SDK and integration contracts",
+      "status": "PASS",
+      "tests": 14,
+      "log": "qa/verification-logs-v0.7.0/final-quick.log"
+    },
+    {
+      "name": "OpenAPI and JSON schema/example parsing",
+      "status": "PASS",
+      "note": "OpenAPI SSE brace defect found by the new test and corrected before release."
+    },
+    {
+      "name": "Complete quick suite",
+      "status": "PASS",
+      "details": {
+        "ammLiquidityPropertyCases": 160000,
+        "solidityFiles": 37,
+        "staticAuditSourceFiles": 51,
+        "scannerTests": 8,
+        "scoutTests": 1,
+        "indexerSecurityTests": 3,
+        "uiTests": 7,
+        "intelligenceTests": 14,
+        "typescriptBuild": true,
+        "productionViteBuild": true
+      }
+    },
+    {
+      "name": "Local Launch Radar/CLI smoke",
+      "status": "PASS",
+      "evidence": "qa/demo-smoke-v0.7.0/summary.json"
+    },
+    {
+      "name": "Source-matched compiler artifacts and browser ABI",
+      "status": "PASS",
+      "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392"
+    },
+    {
+      "name": "Release-integrity scan",
+      "status": "PASS",
+      "evidence": "qa/verification-logs-v0.7.0/release-check.log"
+    },
+    {
+      "name": "SDK package dry release",
+      "status": "PASS",
+      "evidence": "qa/verification-logs-v0.7.0/sdk-pack.json"
+    },
+    {
+      "name": "Fresh dependency registry audit",
+      "status": "NOT_RUN",
+      "evidence": "qa/verification-logs-v0.7.0/dependency-audit-status.json"
+    }
+  ],
+  "safetyInvariants": {
+    "autoExecutionAllowed": false,
+    "userSignatureRequired": true,
+    "privateKeyStorageAllowed": false,
+    "frontRunningAllowed": false,
+    "sandwichingAllowed": false,
+    "antiBotBypassAllowed": false,
+    "remoteSdkRequiresHttps": true,
+    "chainAllowlistEnforcedForReview": true
+  },
+  "liveSmoke": {
+    "status": "PASS",
+    "appVersion": "0.7.0",
+    "protocolVersion": "0.6.0",
+    "health": true,
+    "sourceCount": 7,
+    "candidateCount": 1,
+    "alertMatches": 0,
+    "localCandidatePolicyBlocked": true,
+    "riskEnumNormalized": true,
+    "readOnlyPolicy": {
+      "autoExecutionAllowed": false,
+      "userSignatureRequired": true,
+      "privateKeyStorageAllowed": false,
+      "frontRunningAllowed": false,
+      "sandwichingAllowed": false,
+      "antiBotBypassAllowed": false
+    }
+  },
+  "dependencyAudit": {
+    "status": "NOT_RERUN_REGISTRY_UNAVAILABLE",
+    "reason": "npm audit registry request stalled in the verification environment and was terminated without a result.",
+    "dependencyGraphUnchangedFromV060": true,
+    "rootDependencyGraphUnchanged": true,
+    "webDependencyGraphUnchanged": true,
+    "inheritedEvidence": [
+      "qa/verification-logs-v0.6.0/npm-audit-runtime.json",
+      "qa/verification-logs-v0.6.0/npm-audit-web-runtime.json"
+    ],
+    "warning": "Inherited v0.6 audit files are not a fresh v0.7 registry audit."
+  },
+  "externalGates": [
+    "durable database and reorg rewind implementation",
+    "live Robinhood WebSocket/sequencer feed integration",
+    "concrete chain-specific v4, bonding-curve and LBP adapters",
+    "webhook delivery worker",
+    "transaction simulation and user-wallet execution service",
+    "fresh registry audit in a network-enabled release environment",
+    "independent smart-contract, economic, frontend, infrastructure and legal review"
+  ],
+  "logSha256": {
+    "finalQuick": "d01922a386515a4f0be248ba4532945ebb5dc82773a375fa076eb679b0a14cf8",
+    "releaseCheck": "861cda9e05909b90beb6129e305903a49aa30027f0233594632f9e5325e262f1",
+    "demoSmoke": "487e93cc46feb33996960e2fed6ee0a41d47753e3327a0de0c5a21d06012de22",
+    "sdkPack": "f3d69852b9e41e6ae023f53405117b55955c7b483adc30ca849d94eca1b902d9"
+  }
+}

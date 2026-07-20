@@ -1,0 +1,14 @@
+{
+  "expectedArbOsVersion": 61,
+  "expectedNitroImage": "offchainlabs/nitro-node:v3.11.2-3599aca",
+  "autoUpgradeAllowed": false,
+  "requiredApprovals": 2,
+  "requiredChecks": [
+    "review the official Robinhood notice",
+    "verify image digest and chain-info compatibility",
+    "test snapshot restore and rollback",
+    "canary a non-production node",
+    "confirm L1 execution and beacon dependencies",
+    "verify sync, feed and RPC health before promotion"
+  ]
+}

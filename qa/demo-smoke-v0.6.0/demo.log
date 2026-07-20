@@ -1,0 +1,46 @@
+
+> robinhood-stock-pair-launchpad@0.6.0 local
+> npm run demo
+
+
+> robinhood-stock-pair-launchpad@0.6.0 demo
+> npm run validate:artifacts && node scripts/start-demo.mjs
+
+
+> robinhood-stock-pair-launchpad@0.6.0 validate:artifacts
+> node scripts/validate-artifacts.mjs
+
+{
+  "ok": true,
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "contracts": 31,
+  "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392",
+  "browserAbiMatched": true
+}
+This version of µWS is not compatible with your Node.js build:
+
+Error: Cannot find module '../binaries/uws_linux_x64_127.node'
+Require stack:
+- /mnt/data/stockpair_v060_work/stockpair-robinhood-chain-launchpad-v0.5.0-complete/node_modules/ganache/node_modules/@trufflesuite/uws-js-unofficial/src/uws.js
+- /mnt/data/stockpair_v060_work/stockpair-robinhood-chain-launchpad-v0.5.0-complete/node_modules/ganache/dist/node/core.js
+Falling back to a NodeJS implementation; performance may be degraded.
+
+
+Local Robinhood-compatible EVM running at http://127.0.0.1:8545
+Launchpad: 0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B
+Demo pool: 0x46d6Eceb867682c788F96B9B5d046aA261e9D0a0
+Funded unlocked test account: 0xFFcf8FDEE72ac11b5c542428B35EEF5769C409f0
+Web UI: http://127.0.0.1:5173
+Indexer: http://127.0.0.1:8787/health
+
+> robinhood-stock-pair-launchpad-web@0.6.0 dev
+> vite --host 127.0.0.1
+
+StockPair indexer listening on http://127.0.0.1:8787
+
+  [32m[1mVITE[22m v8.1.5[39m  [2mready in [0m[1m218[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5173[22m/[39m
+(node:48960) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [Server]. MaxListeners is 10. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+npm exited with 143

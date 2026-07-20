@@ -1,0 +1,164 @@
+{
+  "contractName": "BytecodePolicy",
+  "sourceName": "src/libraries/BytecodePolicy.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "DangerousSelector",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint8",
+          "name": "opcode",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "offset",
+          "type": "uint256"
+        }
+      ],
+      "name": "ForbiddenOpcode",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "size",
+          "type": "uint256"
+        }
+      ],
+      "name": "RuntimeTooSmall",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x6080806040523460175760109081601c823930815050f35b5f80fdfe5f80fdfea164736f6c634300081e000a",
+  "deployedBytecode": "0x5f80fdfea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes4",
+              "name": "selector",
+              "type": "bytes4"
+            }
+          ],
+          "name": "DangerousSelector",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint8",
+              "name": "opcode",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "offset",
+              "type": "uint256"
+            }
+          ],
+          "name": "ForbiddenOpcode",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "size",
+              "type": "uint256"
+            }
+          ],
+          "name": "RuntimeTooSmall",
+          "type": "error"
+        }
+      ],
+      "devdoc": {
+        "details": "This deliberately rejects delegate-based and self-destructible runtimes. It is a conservative      defense-in-depth boundary, not a proof that an accepted token is economically or legally safe.      The full runtime is scanned, including compiler metadata, because handcrafted bytecode can jump      into a valid-looking metadata trailer. Ambiguous runtime bytes are rejected rather than trusted.",
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "notice": "Strict bytecode policy for production stock-token assets.",
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/libraries/BytecodePolicy.sol": "BytecodePolicy"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/libraries/BytecodePolicy.sol": {
+        "keccak256": "0x58ba9cbc8055bb3f70ec22f9b503349567658ddebb36be16be0ec149b068c0dc",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://c8e5a0c0b3d0f5ca934a8e69520b9cc204d559c594506a2d87a331ff762b2018",
+          "dweb:/ipfs/QmdWMKspaPeTUdzQSCiPBF2FRrurJcwpZB18qjizy93gVe"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

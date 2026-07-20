@@ -1,0 +1,140 @@
+{
+  "release": "0.9.0",
+  "generatedAt": "2026-07-19T21:41:00.651692+00:00",
+  "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392",
+  "scenarios": [
+    {
+      "name": "lifecycle",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 27837.984994,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/01-lifecycle.log",
+      "sha256": "4c7e931ebb4276556939e0de9f77dd45727ed17783af2db33f33fdcb860df490"
+    },
+    {
+      "name": "incident-exit",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 30325.493089,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/02-incident-exit.log",
+      "sha256": "d1aff4a7c94328623c9ba63f8aefcc4110ed99343ccfb6dde1281ec0a394a7bd"
+    },
+    {
+      "name": "delist-exit",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 27993.062049,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/03-delist-exit.log",
+      "sha256": "873344100dbf6f4446ef45d1756b29ef9a758c8827cfcc9a6c8e0db1158eb01a"
+    },
+    {
+      "name": "creator-bounds",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 22509.415862,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/04-creator-bounds.log",
+      "sha256": "6b1d0ef115df3cfe0e02bec7fc59e0d160c73cc6526216d50c8915812d6417e6"
+    },
+    {
+      "name": "fee-token",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 16417.615737,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/05-fee-token.log",
+      "sha256": "49d4abdeb1c6b791511cc37e365adb6df8dafe1c68f77c297bcd4e7cf871bb8b"
+    },
+    {
+      "name": "reentrancy",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 20170.738437,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/06-reentrancy.log",
+      "sha256": "d3ab44b2d8f9d5356efdb714e0bbac4383b910fe922c4bdebddf75a328526b47"
+    },
+    {
+      "name": "oracle",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 18177.839084,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/07-oracle.log",
+      "sha256": "db665d7ec02c108672c0e769fff1c5cde90512c70d5807ae3f0436892605e720"
+    },
+    {
+      "name": "bytecode-policy",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 17337.339361,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/08-bytecode-policy.log",
+      "sha256": "b9aeec17dc71b5882f898691160f7124f60b96e27d2e35ee33641fd43b2fa922"
+    },
+    {
+      "name": "frontend-compromise",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 26931.301845,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/09-frontend-compromise.log",
+      "sha256": "29e887af5671d44f602ad46a0dea051e5f3a4d75cd067ceeb809d3ad34216332"
+    },
+    {
+      "name": "eligibility-governance",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 15949.113769,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/10-eligibility-governance.log",
+      "sha256": "450d40bcf8a1098876c78518c9022e47a4cf5d24a6b2a4f340d094d61a85fbc1"
+    },
+    {
+      "name": "security-timelock",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 9441.824532,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/11-security-timelock.log",
+      "sha256": "6706243ac8bb91129505a8fa7b57854acf0c67616f87c27656bcdeea4690e59d"
+    },
+    {
+      "name": "security-assets",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 11509.964147,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/12-security-assets.log",
+      "sha256": "5c4d199f5f50a4fa8e33791ec7b1c955ade7b77ea68dd45a3f21208b81c016d9"
+    },
+    {
+      "name": "security-controls",
+      "status": "PASS",
+      "tests": 1,
+      "pass": 1,
+      "fail": 0,
+      "durationMs": 28248.48321,
+      "log": "qa/verification-logs-v0.9.0/e2e-final/13-security-controls.log",
+      "sha256": "37ce3fdf1b0e139dcf9ae6af0ab17564da09aa900d30e984863c993ace3eb5d2"
+    }
+  ],
+  "passed": 13,
+  "failed": 0,
+  "note": "Each scenario ran in a fresh Node/Ganache process. Only completed TAP outputs are counted."
+}

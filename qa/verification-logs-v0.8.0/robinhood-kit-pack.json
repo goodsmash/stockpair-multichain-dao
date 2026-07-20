@@ -1,0 +1,41 @@
+[
+  {
+    "id": "@stockpair/robinhood-chain-kit@0.8.0",
+    "name": "@stockpair/robinhood-chain-kit",
+    "version": "0.8.0",
+    "size": 3777,
+    "unpackedSize": 11416,
+    "shasum": "acc4620dfa152f00beed5b95d402bd5839b79d00",
+    "integrity": "sha512-0QejbxIeOOglt26iCFovZmw4+jSfgdbXFKISTG7/xX/7rWwLqKC+FyvUCkis0s0K/z5JFPWv5ApnlXlE/kJFDw==",
+    "filename": "stockpair-robinhood-chain-kit-0.8.0.tgz",
+    "files": [
+      {
+        "path": "README.md",
+        "size": 2265,
+        "mode": 420
+      },
+      {
+        "path": "bin/stockpair-robinhood.mjs",
+        "size": 2397,
+        "mode": 493
+      },
+      {
+        "path": "package.json",
+        "size": 336,
+        "mode": 420
+      },
+      {
+        "path": "src/index.d.ts",
+        "size": 1388,
+        "mode": 420
+      },
+      {
+        "path": "src/index.js",
+        "size": 5030,
+        "mode": 420
+      }
+    ],
+    "entryCount": 5,
+    "bundled": []
+  }
+]

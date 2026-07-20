@@ -1,0 +1,42 @@
+name: Product bug
+about: Report a reproducible non-security defect
+labels: ['bug', 'triage']
+body:
+  - type: markdown
+    attributes:
+      value: Do not use this form for vulnerabilities or active exploits. Follow SECURITY.md.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+    validations:
+      required: true
+  - type: input
+    id: chain
+    attributes:
+      label: Chain ID and network
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: What happened?
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Sanitized diagnostics
+      description: Use Settings → Copy diagnostics. Remove wallet addresses if you do not want them public.

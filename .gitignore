@@ -1,0 +1,23 @@
+.env
+.env.*
+!.env.example
+out/
+cache/
+broadcast/
+node_modules/
+dist/
+coverage/
+slither.db.json
+slither.config.json
+*.log
+.DS_Store
+.idea/
+.vscode/
+.tools/
+deployments/local.json
+apps/web/.env.local
+*.zip
+
+# Reviewed release evidence is intentionally versioned.
+!qa/verification-logs-v0.6.0/*.log
+!qa/demo-smoke-v0.6.0/*

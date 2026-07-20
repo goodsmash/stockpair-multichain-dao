@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "status": "ready-for-user-review",
+  "chainId": 46630,
+  "candidateId": "46630:0x1111111111111111111111111111111111111111",
+  "createdAt": "2026-07-19T18:00:00.000Z",
+  "expiresAt": "2026-07-19T18:05:00.000Z",
+  "policy": {
+    "directChainRefresh": true,
+    "simulation": true,
+    "verifiedFactory": true,
+    "maxSlippageBps": 100,
+    "maxPositionBps": 50,
+    "maxSpend": "10000000000000000"
+  },
+  "steps": [
+    { "kind": "refresh", "state": "passed", "evidence": ["canonical block hash recorded"] },
+    { "kind": "provenance", "state": "passed", "evidence": ["factory runtime hash and pool registry matched"] },
+    { "kind": "quote", "state": "passed", "evidence": ["quote refreshed against direct RPC"] },
+    { "kind": "simulation", "state": "passed", "evidence": ["exact call simulated successfully"] },
+    { "kind": "transaction-review", "state": "passed", "evidence": ["recipient, spender, deadline and minimum output decoded"] }
+  ],
+  "transaction": {
+    "to": "0x2222222222222222222222222222222222222222",
+    "value": "0",
+    "data": "0x",
+    "function": "exampleOnly()"
+  },
+  "authorization": {
+    "userSignatureRequired": true,
+    "privateKeyIncluded": false,
+    "broadcastAllowed": false
+  },
+  "blockers": []
+}

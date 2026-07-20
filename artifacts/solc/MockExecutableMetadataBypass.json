@@ -1,0 +1,67 @@
+{
+  "contractName": "MockExecutableMetadataBypass",
+  "sourceName": "src/mocks/MockExecutableMetadataBypass.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x60806040523460e55760405160c081016001600160401b0381118282101760d15760405260a080825260208201919036833780511560bd576060825380516001101560bd57606d602182015380516002101560bd576056602282015380516003101560bd575f60238201538051606c101560bd5760a1608c8201538051606d101560bd57605b608d8201538051606e101560bd5760f4608e8201538051609e101560bd575f60be8201538051609f101560bd57603260bf8201535190f35b634e487b7160e01b5f52603260045260245ffd5b634e487b7160e01b5f52604160045260245ffd5b5f80fdfe",
+  "deployedBytecode": "0x5f80fdfea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        }
+      ],
+      "devdoc": {
+        "details": "Deploys crafted runtime with a valid-looking terminal CBOR map that is also executable. A scanner that excludes compiler metadata misses the DELEGATECALL reached at metadataStart + 2.",
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/mocks/MockExecutableMetadataBypass.sol": "MockExecutableMetadataBypass"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/mocks/MockExecutableMetadataBypass.sol": {
+        "keccak256": "0x43956fe3c1bcff98197d33ae976eee8ed96d6675bb6567550ec091bd7b790926",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://13eacb37f8b6c8c65023c4bdddece8ccfef74d2f5cd2325aed7fe4d12d198813",
+          "dweb:/ipfs/QmVRnYwqnkU84AFqUSuS78VGLN2TsNtXiQuSpd9R6bcP4e"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

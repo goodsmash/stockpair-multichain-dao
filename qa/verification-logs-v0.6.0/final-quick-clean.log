@@ -1,0 +1,280 @@
+
+> robinhood-stock-pair-launchpad@0.6.0 test:quick
+> npm run validate:artifacts && npm run test:math && npm run test:structure && npm run test:static && npm run test:config && npm run test:scanner && npm run test:scout && npm run test:indexer-security && npm run test:ui && npm run test:web
+
+
+> robinhood-stock-pair-launchpad@0.6.0 validate:artifacts
+> node scripts/validate-artifacts.mjs
+
+{
+  "ok": true,
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "contracts": 31,
+  "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392",
+  "browserAbiMatched": true
+}
+
+> robinhood-stock-pair-launchpad@0.6.0 test:math
+> node --test scripts/amm-property.test.mjs
+
+TAP version 13
+# Subtest: known quote matches constant-product formula
+ok 1 - known quote matches constant-product formula
+  ---
+  duration_ms: 0.691202
+  type: 'test'
+  ...
+# Subtest: 100,000 deterministic swaps preserve k and cannot drain the output reserve
+ok 2 - 100,000 deterministic swaps preserve k and cannot drain the output reserve
+  ---
+  duration_ms: 155.380773
+  type: 'test'
+  ...
+# Subtest: quotes are monotonic in exact input
+ok 3 - quotes are monotonic in exact input
+  ---
+  duration_ms: 4.851989
+  type: 'test'
+  ...
+# Subtest: proportional liquidity mint and burn never overpays reserves
+ok 4 - proportional liquidity mint and burn never overpays reserves
+  ---
+  duration_ms: 89.416311
+  type: 'test'
+  ...
+# Subtest: contract-side swap input cap rejects more than 5% of the input reserve
+ok 5 - contract-side swap input cap rejects more than 5% of the input reserve
+  ---
+  duration_ms: 0.208354
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 349.342682
+
+> robinhood-stock-pair-launchpad@0.6.0 test:structure
+> node scripts/solidity-structure-check.mjs
+
+Solidity structural checks passed for 37 files.
+
+> robinhood-stock-pair-launchpad@0.6.0 test:static
+> node scripts/static-audit.mjs
+
+Static security checks passed across 48 source files.
+
+> robinhood-stock-pair-launchpad@0.6.0 test:config
+> node scripts/validate-config.mjs config/robinhood-testnet.example.json
+
+Configuration config/robinhood-testnet.example.json passed validation.
+
+> robinhood-stock-pair-launchpad@0.6.0 test:scanner
+> node --test scripts/risk-scanner.test.mjs
+
+TAP version 13
+# Subtest: empty code is blocked
+ok 1 - empty code is blocked
+  ---
+  duration_ms: 0.85684
+  type: 'test'
+  ...
+# Subtest: minimal proxy is dangerous
+ok 2 - minimal proxy is dangerous
+  ---
+  duration_ms: 6.438425
+  type: 'test'
+  ...
+# Subtest: privileged controls increase risk
+ok 3 - privileged controls increase risk
+  ---
+  duration_ms: 2.836774
+  type: 'test'
+  ...
+# Subtest: operator-pinned code hash is trusted
+ok 4 - operator-pinned code hash is trusted
+  ---
+  duration_ms: 0.84243
+  type: 'test'
+  ...
+# Subtest: pinned code cannot bypass registry denial
+ok 5 - pinned code cannot bypass registry denial
+  ---
+  duration_ms: 0.836771
+  type: 'test'
+  ...
+# Subtest: production verification requirement fails closed
+ok 6 - production verification requirement fails closed
+  ---
+  duration_ms: 0.47794
+  type: 'test'
+  ...
+# Subtest: pinned code cannot bypass dangerous selector evidence
+ok 7 - pinned code cannot bypass dangerous selector evidence
+  ---
+  duration_ms: 0.899736
+  type: 'test'
+  ...
+# Subtest: pinned code cannot bypass populated proxy slots
+ok 8 - pinned code cannot bypass populated proxy slots
+  ---
+  duration_ms: 0.813546
+  type: 'test'
+  ...
+1..8
+# tests 8
+# suites 0
+# pass 8
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 386.769019
+
+> robinhood-stock-pair-launchpad@0.6.0 test:scout
+> node --test scripts/scout.test.mjs
+
+TAP version 13
+# This version of µWS is not compatible with your Node.js build:
+# Error: Cannot find module '../binaries/uws_linux_x64_127.node'
+# Require stack:
+# - /mnt/data/stockpair_v060_work/stockpair-robinhood-chain-launchpad-v0.5.0-complete/node_modules/ganache/node_modules/@trufflesuite/uws-js-unofficial/src/uws.js
+# - /mnt/data/stockpair_v060_work/stockpair-robinhood-chain-launchpad-v0.5.0-complete/node_modules/ganache/dist/node/core.js
+# Falling back to a NodeJS implementation; performance may be degraded.
+# Subtest: Chain Scout detects a newly deployed ERC-20-like contract
+ok 1 - Chain Scout detects a newly deployed ERC-20-like contract
+  ---
+  duration_ms: 512.513283
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1082.874503
+
+> robinhood-stock-pair-launchpad@0.6.0 test:indexer-security
+> node --test scripts/indexer-security.test.mjs
+
+TAP version 13
+# Subtest: indexer enforces bounded streams and cross-origin API isolation
+ok 1 - indexer enforces bounded streams and cross-origin API isolation
+  ---
+  duration_ms: 0.662178
+  type: 'test'
+  ...
+# Subtest: production config rejects local, credentialed or path origins
+ok 2 - production config rejects local, credentialed or path origins
+  ---
+  duration_ms: 1038.344385
+  type: 'test'
+  ...
+# Subtest: explicit disposable local demo acknowledgement is narrowly scoped
+ok 3 - explicit disposable local demo acknowledgement is narrowly scoped
+  ---
+  duration_ms: 704.293197
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 1840.059999
+
+> robinhood-stock-pair-launchpad@0.6.0 test:ui
+> npm --prefix apps/web run test:ui
+
+
+> robinhood-stock-pair-launchpad-web@0.6.0 test:ui
+> node --test scripts/*.test.mjs
+
+TAP version 13
+# Subtest: hostile URLs cannot become explorer links
+ok 1 - hostile URLs cannot become explorer links
+  ---
+  duration_ms: 0.769019
+  type: 'test'
+  ...
+# Subtest: hostile values are normalized instead of trusted
+ok 2 - hostile values are normalized instead of trusted
+  ---
+  duration_ms: 0.289486
+  type: 'test'
+  ...
+# Subtest: public UI contains every required user surface
+ok 3 - public UI contains every required user surface
+  ---
+  duration_ms: 0.939976
+  type: 'test'
+  ...
+# Subtest: public UI has responsive and accessible shell contracts
+ok 4 - public UI has responsive and accessible shell contracts
+  ---
+  duration_ms: 0.327033
+  type: 'test'
+  ...
+# Subtest: public build keeps administration disabled by default
+ok 5 - public build keeps administration disabled by default
+  ---
+  duration_ms: 0.116605
+  type: 'test'
+  ...
+# Subtest: hostile indexer data and approvals are fail-closed
+ok 6 - hostile indexer data and approvals are fail-closed
+  ---
+  duration_ms: 0.25202
+  type: 'test'
+  ...
+# Subtest: pool provenance and degraded discovery are independently represented
+ok 7 - pool provenance and degraded discovery are independently represented
+  ---
+  duration_ms: 0.138048
+  type: 'test'
+  ...
+1..7
+# tests 7
+# suites 0
+# pass 7
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 580.802819
+
+> robinhood-stock-pair-launchpad@0.6.0 test:web
+> npm --prefix apps/web run build
+
+
+> robinhood-stock-pair-launchpad-web@0.6.0 build
+> npm run check && vite build && node scripts/harden-dist.mjs
+
+
+> robinhood-stock-pair-launchpad-web@0.6.0 check
+> tsc --noEmit
+
+[36mvite v8.1.5 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 418 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     1.73 kB │ gzip:  0.75 kB
+dist/assets/index-BEWbIB7e.css                     47.93 kB │ gzip: 10.76 kB
+dist/assets/utils-Bpv4vmSW.js                       2.19 kB │ gzip:  0.97 kB
+dist/assets/ccip-CsPHpuad.js                        2.86 kB │ gzip:  1.32 kB
+dist/assets/secp256k1-BNHPt8Gq.js                  30.03 kB │ gzip: 12.01 kB
+dist/assets/localBatchGatewayRequest-BQmdb490.js  106.64 kB │ gzip: 30.36 kB
+dist/assets/index-DbzESIis.js                     261.34 kB │ gzip: 70.00 kB
+
+[32m✓ built in 655ms[39m
+Production dist CSP hardened for 'self', https://rpc.testnet.chain.robinhood.com, wss://rpc.testnet.chain.robinhood.com

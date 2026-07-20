@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/webhook-event.schema.json",
+  "title": "StockPair signed launch alert",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["version", "event"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "kind", "chainId", "address", "blockNumber", "riskScore"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1, "maxLength": 240 },
+        "kind": { "enum": ["token-detected", "pool-created"] },
+        "at": { "type": "string", "maxLength": 64 },
+        "chainId": { "type": "integer", "minimum": 1 },
+        "chain": { "type": "string", "maxLength": 80 },
+        "address": { "type": "string", "maxLength": 64 },
+        "token": {
+          "type": ["object", "null"],
+          "properties": {
+            "name": { "type": "string", "maxLength": 96 },
+            "symbol": { "type": "string", "maxLength": 24 },
+            "decimals": { "type": "integer", "minimum": 0, "maximum": 255 }
+          }
+        },
+        "deployer": { "type": "string", "maxLength": 64 },
+        "pool": { "type": "string", "maxLength": 64 },
+        "transactionHash": { "type": "string", "maxLength": 80 },
+        "blockNumber": { "type": "string", "pattern": "^[0-9]+$" },
+        "riskScore": { "type": "number", "minimum": 0, "maximum": 100 },
+        "riskStatus": { "type": "string", "maxLength": 24 },
+        "explorerUrl": { "type": "string", "maxLength": 300 }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/node-upgrade-policy.schema.json",
+  "title": "Robinhood node and upgrade policy",
+  "type": "object",
+  "required": ["expectedArbOsVersion", "requiredChecks"],
+  "properties": {
+    "expectedArbOsVersion": { "type": "integer", "minimum": 1 },
+    "requiredChecks": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "autoUpgradeAllowed": { "const": false }
+  }
+}

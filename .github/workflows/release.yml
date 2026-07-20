@@ -1,0 +1,56 @@
+name: Release artifact
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+env:
+  NODE_VERSION: '22.16.0'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run verify
+      - name: Build complete release archive
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          ROOT="stockpair-${VERSION}"
+          mkdir -p "release-stage/${ROOT}"
+          git archive HEAD | tar -x -C "release-stage/${ROOT}"
+          mkdir -p "release-stage/${ROOT}/apps/web"
+          cp -R apps/web/dist "release-stage/${ROOT}/apps/web/dist"
+          (cd release-stage && zip -q -r "../stockpair-${VERSION}-complete.zip" "${ROOT}")
+          sha256sum "stockpair-${VERSION}-complete.zip" > "stockpair-${VERSION}-complete.zip.sha256"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: stockpair-${{ github.ref_name }}
+          path: |
+            stockpair-*-complete.zip
+            stockpair-*-complete.zip.sha256
+          if-no-files-found: error
+          retention-days: 90
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" \
+            stockpair-*-complete.zip stockpair-*-complete.zip.sha256 \
+            --verify-tag \
+            --generate-notes \
+            --title "StockPair ${GITHUB_REF_NAME}"

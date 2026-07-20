@@ -1,0 +1,42 @@
+services:
+  - type: web
+    runtime: docker
+    name: stockpair-indexer
+    dockerfilePath: ./deploy/indexer/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    maxShutdownDelaySeconds: 30
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: PORT
+        value: 8787
+      - key: RH_CHAIN_ID
+        sync: false
+      - key: RH_CHAIN_NAME
+        sync: false
+      - key: RH_RPC_URL
+        sync: false
+      - key: RH_EXPLORER_URL
+        sync: false
+      - key: RH_WS_URL
+        sync: false
+      - key: LAUNCHPAD_ADDRESS
+        sync: false
+      - key: LAUNCHPAD_CODE_HASH
+        sync: false
+      - key: LAUNCHPAD_PROTOCOL_VERSION
+        sync: false
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: ALLOWED_HOSTS
+        sync: false
+      - key: PRODUCTION_TRADING_ENABLED
+        value: "false"
+      - key: SCOUT_ENABLED
+        value: "true"
+      - key: ALERT_DELIVERY_ENABLED
+        value: "false"

@@ -1,0 +1,137 @@
+name: CI
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '22.16.0'
+
+jobs:
+  node-and-web:
+    name: Node, UI, static and property tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run compile
+      - run: npm test
+      - run: npm run test:ui
+      - run: npm run check:release
+      - name: Runtime dependency audit
+        run: |
+          npm audit --omit=dev --audit-level=high
+          npm audit --workspace robinhood-stock-pair-launchpad-web --omit=dev --audit-level=high
+      - uses: actions/upload-artifact@v7
+        with:
+          name: stockpair-web-dist-${{ github.sha }}
+          path: apps/web/dist
+          if-no-files-found: error
+          retention-days: 14
+
+  deployed-bytecode-scenarios:
+    name: EVM scenario — ${{ matrix.scenario }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario:
+          - lifecycle
+          - incident-exit
+          - delist-exit
+          - creator-bounds
+          - fee-token
+          - reentrancy
+          - oracle
+          - bytecode-policy
+          - frontend-compromise
+          - eligibility-governance
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run compile
+      - run: node --test scripts/e2e/${{ matrix.scenario }}.test.mjs
+
+  security-hardening-scenarios:
+    name: Security control — ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: timelock
+            pattern: timelock is mandatory
+          - name: strict-assets
+            pattern: strict stock policy
+          - name: vesting-and-limits
+            pattern: creator vesting
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci --ignore-scripts --no-audit --no-fund
+      - run: npm run compile
+      - run: node --test --test-name-pattern="${{ matrix.pattern }}" scripts/e2e/security-hardening.test.mjs
+
+  foundry:
+    name: Foundry build, fuzz and invariant tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - run: forge fmt --check
+      - run: forge build --sizes
+      - run: forge test -vvv
+
+  slither:
+    name: Slither static analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: stable
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+          cache: pip
+      - run: pip install --disable-pip-version-check slither-analyzer
+      - run: forge build
+      - run: slither . --filter-paths "test|script|src/mocks"

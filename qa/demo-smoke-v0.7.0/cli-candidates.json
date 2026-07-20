@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-07-19T18:59:52.056Z",
+  "count": 1,
+  "total": 1,
+  "policy": {
+    "version": "1.0",
+    "mode": "review-only",
+    "enabled": false,
+    "autoExecutionAllowed": false,
+    "userSignatureRequired": true,
+    "privateKeyStorageAllowed": false,
+    "frontRunningAllowed": false,
+    "sandwichingAllowed": false,
+    "antiBotBypassAllowed": false,
+    "requireSimulation": true,
+    "requireDirectChainRefresh": true,
+    "requireVerifiedFactory": true,
+    "maxRiskScore": 20,
+    "maxSlippageBps": 100,
+    "maxPositionBps": 50,
+    "maxDailySpend": "0",
+    "cooldownSeconds": 30,
+    "minLiquidity": "0",
+    "allowedChainIds": [
+      46630
+    ]
+  },
+  "candidates": [
+    {
+      "id": "31337:0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab",
+      "chainId": 31337,
+      "chain": "StockPair Local",
+      "explorerUrl": "http://127.0.0.1:8545/",
+      "tokenAddress": "0xe78A0F7E598Cc8b0Bb87894B0F60dD2a88d6a8Ab",
+      "deployer": "0x90F8bf6A479f320ead074411a4B0e7944Ea8c9C1",
+      "transactionHash": "0x70c20f0e8de2c2a643385f8eda09788e73a19fbd4bcbdf663f16d9bd116c8029",
+      "blockNumber": "1",
+      "timestamp": "2026-07-19T18:59:02.000Z",
+      "ageMinutes": 0,
+      "stage": "detected",
+      "token": {
+        "name": "Mock Robinhood Stock Token",
+        "symbol": "MRH",
+        "decimals": 18,
+        "totalSupply": "1000000000000000000000000",
+        "owner": null,
+        "paused": null
+      },
+      "codeHash": "0x41f53841b5edebb51ac6848fa34367e5358df95a6549c853644de76d72ea3ce4",
+      "risk": {
+        "score": 0,
+        "status": "LOW",
+        "findings": []
+      },
+      "evidence": [],
+      "market": {
+        "poolCount": 0,
+        "verifiedPoolCount": 0,
+        "standards": [],
+        "swapCount": 0,
+        "uniqueTraders": 0,
+        "latestSwapAt": null
+      },
+      "provenance": {
+        "codeFamilySize": 1,
+        "deployerContracts": 4,
+        "deployerTokens": 1,
+        "publicEvidenceCount": 0
+      },
+      "scores": {
+        "overall": 57,
+        "safety": 100,
+        "liquidity": 0,
+        "traction": 0,
+        "freshness": 100,
+        "provenance": 45
+      },
+      "execution": {
+        "eligibleForReview": false,
+        "autoExecutionAllowed": false,
+        "blockers": [
+          "no configured verified factory pool",
+          "chain is not allowed by execution policy"
+        ],
+        "requiredNextSteps": [
+          "refresh direct-chain state",
+          "simulate exact transaction",
+          "confirm recipient and spender",
+          "obtain explicit user signature"
+        ]
+      }
+    }
+  ]
+}

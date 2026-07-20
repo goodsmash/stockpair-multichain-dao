@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "sources": [
+    {
+      "id": "stockpair-robinhood-testnet",
+      "adapter": "stockpair-factory",
+      "chainId": 46630,
+      "enabled": true,
+      "addresses": {
+        "factory": "0x0000000000000000000000000000000000000000"
+      },
+      "trust": {
+        "requireRuntimeHash": true,
+        "requireProtocolVersion": true,
+        "requireExplorerVerification": true
+      }
+    },
+    {
+      "id": "configured-uniswap-v4",
+      "adapter": "uniswap-v4-pool-manager",
+      "chainId": 46630,
+      "enabled": false,
+      "addresses": {
+        "poolManager": "0x0000000000000000000000000000000000000000"
+      },
+      "trust": {
+        "requireRuntimeHash": true,
+        "allowHooks": false,
+        "approvedHookCodeHashes": []
+      }
+    }
+  ]
+}

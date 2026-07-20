@@ -1,0 +1,29 @@
+{
+  "release": "0.9.0",
+  "generatedAt": "2026-07-20T08:45:14Z",
+  "scope": "live-mainnet-intelligence-patch",
+  "verification": {
+    "testQuick": "passed",
+    "checkRelease": "passed",
+    "vercelProductionBuildWithBlankIndexer": "passed",
+    "localhostIndexerStringInProductionBundle": false,
+    "ammLiquidityCases": 160000,
+    "solidityFilesChecked": 39,
+    "sourceFilesStaticChecked": 61,
+    "scannerTests": 8,
+    "scoutTests": 1,
+    "indexerSecurityTests": 6,
+    "intelligenceTests": 15,
+    "robinhoodTests": 16,
+    "liveIntelligenceTests": 7,
+    "directDexTests": 4,
+    "uiTests": 13
+  },
+  "liveDeployment": {
+    "hostedIndexerDeployed": false,
+    "authenticatedProviderConfigured": false,
+    "mainnetTransactionBroadcast": false,
+    "productionAddressesVerified": false
+  },
+  "executionBoundary": "non-custodial-user-signed-only"
+}

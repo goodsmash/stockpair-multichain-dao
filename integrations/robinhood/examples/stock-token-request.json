@@ -1,0 +1,10 @@
+{
+  "chainId": 4663,
+  "token": "0x0000000000000000000000000000000000000001",
+  "feed": "0x0000000000000000000000000000000000000002",
+  "sequencerFeed": "0x0000000000000000000000000000000000000003",
+  "wallet": "0x0000000000000000000000000000000000000004",
+  "heartbeatSeconds": 3600,
+  "gracePeriodSeconds": 3600,
+  "note": "Replace every placeholder with current addresses from the official Robinhood token registry and Chainlink feed registry. Never infer canonical status from symbol or name."
+}

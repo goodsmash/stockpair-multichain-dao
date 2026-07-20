@@ -1,0 +1,176 @@
+{
+  "contractName": "MockEligibilityGate",
+  "sourceName": "src/mocks/MockEligibilityGate.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "eligible",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "isEligible",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "bool",
+          "name": "value",
+          "type": "bool"
+        }
+      ],
+      "name": "setEligible",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60808060405234601557610122908161001a8239f35b5f80fdfe6080806040526004361015610012575f80fd5b5f3560e01c9081630713b139146100c7575080630a2719ab1461007d576366e305fd1461003d575f80fd5b34610079576020366003190112610079576001600160a01b0361005e6100ff565b165f525f602052602060ff60405f2054166040519015158152f35b5f80fd5b34610079576040366003190112610079576100966100ff565b602435908115158092036100795760018060a01b03165f525f60205260405f209060ff801983541691161790555f80f35b34610079576020366003190112610079576020906001600160a01b036100eb6100ff565b165f525f825260ff60405f20541615158152f35b600435906001600160a01b03821682036100795756fea164736f6c634300081e000a",
+  "deployedBytecode": "0x6080806040526004361015610012575f80fd5b5f3560e01c9081630713b139146100c7575080630a2719ab1461007d576366e305fd1461003d575f80fd5b34610079576020366003190112610079576001600160a01b0361005e6100ff565b165f525f602052602060ff60405f2054166040519015158152f35b5f80fd5b34610079576040366003190112610079576100966100ff565b602435908115158092036100795760018060a01b03165f525f60205260405f209060ff801983541691161790555f80f35b34610079576020366003190112610079576020906001600160a01b036100eb6100ff565b165f525f825260ff60405f20541615158152f35b600435906001600160a01b03821682036100795756fea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "eligible",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "isEligible",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "value",
+              "type": "bool"
+            }
+          ],
+          "name": "setEligible",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/mocks/MockEligibilityGate.sol": "MockEligibilityGate"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/interfaces/IEligibilityGate.sol": {
+        "keccak256": "0x505e34e65d9ba5b618d3771a8d9583b648c877baa777ced099807d19b366af72",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://1ff14c30778c818eb85bf53d339c7447210406c7ca4cd52ccc18cd9c22307aea",
+          "dweb:/ipfs/QmNZQ2doAybqPWdqhoG6GCERg3oY2pzDmDhUFtuL25yVTd"
+        ]
+      },
+      "src/mocks/MockEligibilityGate.sol": {
+        "keccak256": "0xc598016a2a4bd24c50224de0a1525b896633c9c0ff10885c109b0e837dc10166",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://623c097405090f12db1eb0ae651bb8e9a383b237ac0ee861ddea3f7f5b55f8e7",
+          "dweb:/ipfs/QmXNSKkKmdmb4iQeUWNHwjYFem9nSj9KJjtKcMtWkZ3nLU"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

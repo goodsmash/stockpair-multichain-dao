@@ -1,0 +1,54 @@
+{
+  "contractName": "Math",
+  "sourceName": "src/libraries/Math.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [],
+  "bytecode": "0x6080806040523460175760109081601c823930815050f35b5f80fdfe5f80fdfea164736f6c634300081e000a",
+  "deployedBytecode": "0x5f80fdfea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/libraries/Math.sol": "Math"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/libraries/Math.sol": {
+        "keccak256": "0xabe8a913b09ac442f00ff719e56c7467b9281a38f8f2d1961bbbd7adfd9831ec",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://fc33f10959b2243df73737f85ecf01abcc5213b2d8b64d0d3fd20d7e2a17fa98",
+          "dweb:/ipfs/QmVaqLZ1di4NW2vcqQ6FABCkCvA3iUasj5runzV4WxGM7g"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

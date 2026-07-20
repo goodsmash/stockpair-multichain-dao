@@ -1,0 +1,20 @@
+{
+  "entities": [
+    {
+      "id": "example-public-project",
+      "name": "Example Public Project",
+      "kind": "project",
+      "website": "https://example.invalid",
+      "sources": ["Replace with a verifiable public project disclosure or explorer label."],
+      "addresses": [
+        {
+          "chainId": 46630,
+          "address": "0x0000000000000000000000000000000000000001",
+          "role": "example only - do not use in production",
+          "source": "https://example.invalid/evidence",
+          "confidence": "low"
+        }
+      ]
+    }
+  ]
+}

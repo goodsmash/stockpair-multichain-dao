@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "event": {
+    "id": "token:4663:0x1111111111111111111111111111111111111111",
+    "kind": "token-detected",
+    "at": "2026-07-19T21:00:00.000Z",
+    "chainId": 4663,
+    "chain": "Robinhood Chain",
+    "address": "0x1111111111111111111111111111111111111111",
+    "token": { "name": "Example", "symbol": "EX", "decimals": 18 },
+    "deployer": "0x2222222222222222222222222222222222222222",
+    "pool": "",
+    "transactionHash": "0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "blockNumber": "123456",
+    "riskScore": 25,
+    "riskStatus": "low",
+    "explorerUrl": "https://robinhoodchain.blockscout.com/address/0x1111111111111111111111111111111111111111"
+  }
+}

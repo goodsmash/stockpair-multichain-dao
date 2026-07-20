@@ -1,0 +1,96 @@
+{
+  "contractName": "SafeTransferLib",
+  "sourceName": "src/libraries/SafeTransferLib.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "TokenTransferFailed",
+      "type": "error"
+    }
+  ],
+  "bytecode": "0x6080806040523460175760109081601c823930815050f35b5f80fdfe5f80fdfea164736f6c634300081e000a",
+  "deployedBytecode": "0x5f80fdfea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "token",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes4",
+              "name": "selector",
+              "type": "bytes4"
+            }
+          ],
+          "name": "TokenTransferFailed",
+          "type": "error"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/libraries/SafeTransferLib.sol": "SafeTransferLib"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/interfaces/IERC20.sol": {
+        "keccak256": "0x1bc0b80df3cba75a6fc1b921028f3fd48f5576e81c938d70830161025261adde",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://764f4b5634336ea064a838fe323ebce61c5c37563d4467489ace364344c78df1",
+          "dweb:/ipfs/Qmd3aGwJJMrQre5EM3KfA1L3rvcMWqR8KPox6npwLtZ5tU"
+        ]
+      },
+      "src/libraries/SafeTransferLib.sol": {
+        "keccak256": "0x4846d6cb32dc9b6230cbf295c42918b2f0534946e6b62a8fd24f761960e8fa1c",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://4eb3c8ce5d3e2d30ca9ec026ea025b8ccfec5489aaf7503f341e8febb996d77c",
+          "dweb:/ipfs/Qme99qPq2J6f8hL6yQwAasVu6i8B5tG9tpxw6Yt9ZAaVMH"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

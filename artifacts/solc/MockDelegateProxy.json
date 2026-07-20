@@ -1,0 +1,112 @@
+{
+  "contractName": "MockDelegateProxy",
+  "sourceName": "src/mocks/MockDelegateProxy.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "implementation_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "fallback"
+    },
+    {
+      "inputs": [],
+      "name": "implementation",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60a034606a57601f61012b38819003918201601f19168301916001600160401b03831184841017606e57808492602094604052833981010312606a57516001600160a01b0381168103606a5760805260405160a8908161008382396080518181816019015260680152f35b5f80fd5b634e487b7160e01b5f52604160045260245ffdfe6080806040526004361015604a575b50365f80375f8036817f00000000000000000000000000000000000000000000000000000000000000005af43d5f803e156046573d5ff35b3d5ffd5b5f3560e01c635c60da1b03600e57346097575f3660031901126097577f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b5f80fdfea164736f6c634300081e000a",
+  "deployedBytecode": "0x6080806040526004361015604a575b50365f80375f8036817f00000000000000000000000000000000000000000000000000000000000000005af43d5f803e156046573d5ff35b3d5ffd5b5f3560e01c635c60da1b03600e57346097575f3660031901126097577f00000000000000000000000000000000000000000000000000000000000000006001600160a01b03168152602090f35b5f80fdfea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "implementation_",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "stateMutability": "payable",
+          "type": "fallback"
+        },
+        {
+          "inputs": [],
+          "name": "implementation",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/mocks/MockDelegateProxy.sol": "MockDelegateProxy"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/mocks/MockDelegateProxy.sol": {
+        "keccak256": "0x05ea6ebaac66c8ef9fcc7ac4d930e0874926806d32b9aa1aa59a3b231c0f1db0",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://c8224b20a7f73e39654f2ce96930f0f5556c50616a4eb9b43a343708e43019c2",
+          "dweb:/ipfs/Qmd9MToM2Es9zsBvR6Grkduc1Azusnfm5DEnfccF2dXvVS"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

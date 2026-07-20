@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/cross-chain-message-plan.schema.json",
+  "title": "Unsigned Robinhood cross-chain message plan",
+  "type": "object",
+  "required": ["version", "direction", "unsigned", "userSignatureRequired", "steps", "warnings"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "direction": { "enum": ["l1-to-l2", "l2-to-l1"] },
+    "unsigned": { "const": true },
+    "userSignatureRequired": { "const": true },
+    "steps": { "type": "array", "minItems": 1 },
+    "warnings": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  }
+}

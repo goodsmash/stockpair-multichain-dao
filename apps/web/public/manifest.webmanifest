@@ -1,0 +1,10 @@
+{
+  "name": "StockPair — Robinhood Chain Markets",
+  "short_name": "StockPair",
+  "description": "Factory-only coin and approved stock-token markets with fail-closed execution verification.",
+  "start_url": "/#discover",
+  "display": "standalone",
+  "background_color": "#080b09",
+  "theme_color": "#0d1510",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

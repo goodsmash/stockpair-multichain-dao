@@ -1,0 +1,21 @@
+HTTP/1.1 200 OK
+content-type: text/event-stream; charset=utf-8
+cache-control: no-cache, no-transform
+x-content-type-options: nosniff
+x-frame-options: DENY
+x-robots-tag: noindex, nofollow, noarchive
+referrer-policy: no-referrer
+permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=()
+cross-origin-opener-policy: same-origin
+cross-origin-resource-policy: cross-origin
+x-stockpair-api-version: 0.9.0
+content-security-policy: default-src 'none'; frame-ancestors 'none'; base-uri 'none'
+access-control-allow-origin: http://127.0.0.1:5173
+vary: Origin
+access-control-allow-methods: GET,OPTIONS
+access-control-allow-headers: content-type,last-event-id
+connection: keep-alive
+x-accel-buffering: no
+Date: Sun, 19 Jul 2026 21:43:39 GMT
+Transfer-Encoding: chunked
+

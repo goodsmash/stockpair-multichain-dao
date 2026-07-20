@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "appVersion": "0.7.0",
+  "protocolVersion": "0.6.0",
+  "health": true,
+  "sourceCount": 7,
+  "candidateCount": 1,
+  "alertMatches": 0,
+  "localCandidatePolicyBlocked": true,
+  "riskEnumNormalized": true,
+  "readOnlyPolicy": {
+    "autoExecutionAllowed": false,
+    "userSignatureRequired": true,
+    "privateKeyStorageAllowed": false,
+    "frontRunningAllowed": false,
+    "sandwichingAllowed": false,
+    "antiBotBypassAllowed": false
+  }
+}

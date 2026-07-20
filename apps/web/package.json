@@ -1,0 +1,26 @@
+{
+  "name": "robinhood-stock-pair-launchpad-web",
+  "private": true,
+  "version": "0.9.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run check && vite build && node scripts/harden-dist.mjs",
+    "preview": "vite preview",
+    "check": "tsc --noEmit",
+    "test:ui": "node --test scripts/*.test.mjs",
+    "build:vercel": "node scripts/validate-env.mjs --production && npm run build",
+    "validate:env": "node scripts/validate-env.mjs"
+  },
+  "dependencies": {
+    "viem": "2.55.2"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "vite": "8.1.5"
+  },
+  "engines": {
+    "node": ">=22.12 <23",
+    "npm": ">=10 <11"
+  }
+}

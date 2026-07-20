@@ -1,0 +1,63 @@
+
+> robinhood-stock-pair-launchpad@0.6.0 setup
+> node scripts/setup-local.mjs
+
+> npm ci --ignore-scripts --no-audit --no-fund
+
+added 357 packages in 10s
+> npm ci --ignore-scripts --no-audit --no-fund
+
+added 32 packages in 5s
+> /opt/nvm/versions/node/v22.16.0/bin/node scripts/validate-artifacts.mjs
+{
+  "ok": true,
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "contracts": 31,
+  "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392",
+  "browserAbiMatched": true
+}
+> /opt/nvm/versions/node/v22.16.0/bin/node --test scripts/ui-contract.test.mjs
+TAP version 13
+# Subtest: public UI contains every required user surface
+ok 1 - public UI contains every required user surface
+  ---
+  duration_ms: 0.917932
+  type: 'test'
+  ...
+# Subtest: public UI has responsive and accessible shell contracts
+ok 2 - public UI has responsive and accessible shell contracts
+  ---
+  duration_ms: 0.209416
+  type: 'test'
+  ...
+# Subtest: public build keeps administration disabled by default
+ok 3 - public build keeps administration disabled by default
+  ---
+  duration_ms: 0.121773
+  type: 'test'
+  ...
+# Subtest: hostile indexer data and approvals are fail-closed
+ok 4 - hostile indexer data and approvals are fail-closed
+  ---
+  duration_ms: 0.243707
+  type: 'test'
+  ...
+# Subtest: pool provenance and degraded discovery are independently represented
+ok 5 - pool provenance and degraded discovery are independently represented
+  ---
+  duration_ms: 0.131518
+  type: 'test'
+  ...
+1..5
+# tests 5
+# suites 0
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 101.217771
+
+Setup complete.
+Run `npm run local` and open http://127.0.0.1:5173
+Use `npm run local:fresh` only after intentionally changing Solidity sources.

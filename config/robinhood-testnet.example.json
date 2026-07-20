@@ -1,0 +1,17 @@
+{
+  "chainId": 46630,
+  "rpcUrl": "https://rpc.testnet.chain.robinhood.com",
+  "owner": "0x1111111111111111111111111111111111111111",
+  "guardian": "0x2222222222222222222222222222222222222222",
+  "eligibilityGate": "0x3333333333333333333333333333333333333333",
+  "sequencerUptimeFeed": "0x4444444444444444444444444444444444444444",
+  "sequencerGraceSeconds": 3600,
+  "stockToken": "0x5555555555555555555555555555555555555555",
+  "stockPriceFeed": "0x6666666666666666666666666666666666666666",
+  "stockTicker": "REPLACE",
+  "maxOracleAgeSeconds": 345600,
+  "requireFreshOracleForSwaps": false,
+  "complianceEnforced": true,
+  "notes": "All addresses are placeholders. Production trading remains disabled until a dedicated RPC, exact deployment code hash, protocol version, multisig/timelock operations, audit and legal approval are configured.",
+  "minInitialStockValueUsd18": "10000000000000000000000"
+}

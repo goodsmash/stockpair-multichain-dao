@@ -1,0 +1,12 @@
+{
+  "status": "NOT_RERUN_REGISTRY_UNAVAILABLE",
+  "reason": "npm audit registry request stalled in the verification environment and was terminated without a result.",
+  "dependencyGraphUnchangedFromV060": true,
+  "rootDependencyGraphUnchanged": true,
+  "webDependencyGraphUnchanged": true,
+  "inheritedEvidence": [
+    "qa/verification-logs-v0.6.0/npm-audit-runtime.json",
+    "qa/verification-logs-v0.6.0/npm-audit-web-runtime.json"
+  ],
+  "warning": "Inherited v0.6 audit files are not a fresh v0.7 registry audit."
+}

@@ -1,0 +1,41 @@
+[
+  {
+    "id": "@stockpair/launch-intelligence-sdk@0.8.0",
+    "name": "@stockpair/launch-intelligence-sdk",
+    "version": "0.8.0",
+    "size": 2979,
+    "unpackedSize": 7377,
+    "shasum": "3560537701de826409ad14a1dfd317141f4c10b4",
+    "integrity": "sha512-Ivk5mNHijX8HCUYyEh9f8jSNWn87lr9+rap6At14pBUY/6egwxp73KcdhNqe/xPjGQtAW63wwvK70qVl7XbQAw==",
+    "filename": "stockpair-launch-intelligence-sdk-0.8.0.tgz",
+    "files": [
+      {
+        "path": "README.md",
+        "size": 1121,
+        "mode": 420
+      },
+      {
+        "path": "bin/stockpair-radar.mjs",
+        "size": 2118,
+        "mode": 493
+      },
+      {
+        "path": "package.json",
+        "size": 360,
+        "mode": 420
+      },
+      {
+        "path": "src/index.d.ts",
+        "size": 1054,
+        "mode": 420
+      },
+      {
+        "path": "src/index.js",
+        "size": 2724,
+        "mode": 420
+      }
+    ],
+    "entryCount": 5,
+    "bundled": []
+  }
+]

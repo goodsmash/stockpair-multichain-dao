@@ -1,0 +1,420 @@
+{
+  "contractName": "MockAggregatorV3",
+  "sourceName": "src/mocks/MockAggregatorV3.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "decimals_",
+          "type": "uint8"
+        },
+        {
+          "internalType": "int256",
+          "name": "initialAnswer",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [],
+      "name": "answer",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "answeredInRound",
+      "outputs": [
+        {
+          "internalType": "uint80",
+          "name": "",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "decimals",
+      "outputs": [
+        {
+          "internalType": "uint8",
+          "name": "",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "latestRoundData",
+      "outputs": [
+        {
+          "internalType": "uint80",
+          "name": "",
+          "type": "uint80"
+        },
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint80",
+          "name": "",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "roundId",
+      "outputs": [
+        {
+          "internalType": "uint80",
+          "name": "",
+          "type": "uint80"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "int256",
+          "name": "newAnswer",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "setAnswer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint80",
+          "name": "roundId_",
+          "type": "uint80"
+        },
+        {
+          "internalType": "int256",
+          "name": "answer_",
+          "type": "int256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "startedAt_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "updatedAt_",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint80",
+          "name": "answeredInRound_",
+          "type": "uint80"
+        }
+      ],
+      "name": "setRoundData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "startedAt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "updatedAt",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60a034609157601f61035738819003918201601f19168301916001600160401b038311848410176095578084926040948552833981010312609157805160ff81168103609157602060029201518260018060501b03195f541660018060501b03196004541693608052175f5560015542825542600355176004556040516102ad90816100aa82396080518161020c0152f35b5f80fd5b634e487b7160e01b5f52604160045260245ffdfe6080806040526004361015610012575f80fd5b5f3560e01c9081631c12940a14610230578163313ce567146101f5575080637519ab50146101d857806385bb7d69146101bb578063860f13831461013b5780638cd221c914610116578063c22c2499146100f0578063f21f537d146100d35763feaf968c1461007f575f80fd5b346100cf575f3660031901126100cf5760a06001600160501b035f5416600154600254600354906001600160501b0360045416926040519485526020850152604084015260608301526080820152f35b5f80fd5b346100cf575f3660031901126100cf576020600254604051908152f35b346100cf575f3660031901126100cf5760206001600160501b0360045416604051908152f35b346100cf575f3660031901126100cf5760206001600160501b035f5416604051908152f35b346100cf5760403660031901126100cf576024355f549060016001600160501b038316016001600160501b0381116101a7576001600160501b031680926001600160501b031916175f55600435600155806002556003556001600160501b031960045416176004555f80f35b634e487b7160e01b5f52601160045260245ffd5b346100cf575f3660031901126100cf576020600154604051908152f35b346100cf575f3660031901126100cf576020600354604051908152f35b346100cf575f3660031901126100cf5760209060ff7f0000000000000000000000000000000000000000000000000000000000000000168152f35b346100cf5760a03660031901126100cf576004356001600160501b0381168091036100cf57608435906001600160501b0382168092036100cf576001600160501b03195f5416175f556024356001556044356002556064356003556001600160501b031960045416176004555f80f3fea164736f6c634300081e000a",
+  "deployedBytecode": "0x6080806040526004361015610012575f80fd5b5f3560e01c9081631c12940a14610230578163313ce567146101f5575080637519ab50146101d857806385bb7d69146101bb578063860f13831461013b5780638cd221c914610116578063c22c2499146100f0578063f21f537d146100d35763feaf968c1461007f575f80fd5b346100cf575f3660031901126100cf5760a06001600160501b035f5416600154600254600354906001600160501b0360045416926040519485526020850152604084015260608301526080820152f35b5f80fd5b346100cf575f3660031901126100cf576020600254604051908152f35b346100cf575f3660031901126100cf5760206001600160501b0360045416604051908152f35b346100cf575f3660031901126100cf5760206001600160501b035f5416604051908152f35b346100cf5760403660031901126100cf576024355f549060016001600160501b038316016001600160501b0381116101a7576001600160501b031680926001600160501b031916175f55600435600155806002556003556001600160501b031960045416176004555f80f35b634e487b7160e01b5f52601160045260245ffd5b346100cf575f3660031901126100cf576020600154604051908152f35b346100cf575f3660031901126100cf576020600354604051908152f35b346100cf575f3660031901126100cf5760209060ff7f0000000000000000000000000000000000000000000000000000000000000000168152f35b346100cf5760a03660031901126100cf576004356001600160501b0381168091036100cf57608435906001600160501b0382168092036100cf576001600160501b03195f5416175f556024356001556044356002556064356003556001600160501b031960045416176004555f80f3fea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint8",
+              "name": "decimals_",
+              "type": "uint8"
+            },
+            {
+              "internalType": "int256",
+              "name": "initialAnswer",
+              "type": "int256"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [],
+          "name": "answer",
+          "outputs": [
+            {
+              "internalType": "int256",
+              "name": "",
+              "type": "int256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "answeredInRound",
+          "outputs": [
+            {
+              "internalType": "uint80",
+              "name": "",
+              "type": "uint80"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "decimals",
+          "outputs": [
+            {
+              "internalType": "uint8",
+              "name": "",
+              "type": "uint8"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "latestRoundData",
+          "outputs": [
+            {
+              "internalType": "uint80",
+              "name": "",
+              "type": "uint80"
+            },
+            {
+              "internalType": "int256",
+              "name": "",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint80",
+              "name": "",
+              "type": "uint80"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "roundId",
+          "outputs": [
+            {
+              "internalType": "uint80",
+              "name": "",
+              "type": "uint80"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "int256",
+              "name": "newAnswer",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "timestamp",
+              "type": "uint256"
+            }
+          ],
+          "name": "setAnswer",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint80",
+              "name": "roundId_",
+              "type": "uint80"
+            },
+            {
+              "internalType": "int256",
+              "name": "answer_",
+              "type": "int256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startedAt_",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "updatedAt_",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint80",
+              "name": "answeredInRound_",
+              "type": "uint80"
+            }
+          ],
+          "name": "setRoundData",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "startedAt",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "updatedAt",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/mocks/MockAggregatorV3.sol": "MockAggregatorV3"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/interfaces/IAggregatorV3.sol": {
+        "keccak256": "0xaa69f497904d1ffe67716f2902faa2b49cb7c2ce0ef7fb78c3fc86ebd3d164fd",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://197b226896c2a8f1fb3194b4270c2132e4f44ca795c117f3b05a01cdb09d9212",
+          "dweb:/ipfs/QmRGVentDEo5nak8P1N7fBHJuuPN6m2TyqFfausMYsqeW2"
+        ]
+      },
+      "src/mocks/MockAggregatorV3.sol": {
+        "keccak256": "0xbdd69d0d34cd3f454d0e05ca150f46665ae541dc211126dccd43de4333694e3b",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://93d9c65eb1d7635256c3e1d77dc3f9dc25389c87b488b0d10eb29467c75d1c26",
+          "dweb:/ipfs/QmVvMRkMixQ7u82B7xw8UkhnXdtWZ5PzNk3G8wYnziDJ9D"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

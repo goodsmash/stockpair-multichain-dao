@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "generatedAt": "2026-07-19T21:31:48.447Z",
+  "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392",
+  "settingsSha256": "b013dcf551be73a0bc1585118a70e9a6e24d60c8979660b2323ec6d4c5e18685",
+  "contracts": 31
+}

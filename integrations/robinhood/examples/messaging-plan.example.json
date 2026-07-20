@@ -1,0 +1,15 @@
+{
+  "direction": "l1-to-l2",
+  "target": "0x0000000000000000000000000000000000000001",
+  "data": "0x",
+  "l2CallValue": "0",
+  "unsigned": true,
+  "userSignatureRequired": true,
+  "requiredPreflight": [
+    "register the reviewed custom Arbitrum network",
+    "re-read official bridge contracts",
+    "estimate retryable gas immediately before signing",
+    "account for L1-contract address aliasing",
+    "monitor manual redemption until complete"
+  ]
+}

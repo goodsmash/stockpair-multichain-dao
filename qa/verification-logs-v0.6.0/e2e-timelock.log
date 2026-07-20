@@ -1,0 +1,22 @@
+TAP version 13
+# This version of µWS is not compatible with your Node.js build:
+# Error: Cannot find module '../binaries/uws_linux_x64_127.node'
+# Require stack:
+# - /mnt/data/stockpair_v060_work/stockpair-robinhood-chain-launchpad-v0.5.0-complete/node_modules/ganache/node_modules/@trufflesuite/uws-js-unofficial/src/uws.js
+# - /mnt/data/stockpair_v060_work/stockpair-robinhood-chain-launchpad-v0.5.0-complete/node_modules/ganache/dist/node/core.js
+# Falling back to a NodeJS implementation; performance may be degraded.
+# Subtest: timelock is mandatory and guardian can cancel queued administration
+ok 1 - timelock is mandatory and guardian can cancel queued administration
+  ---
+  duration_ms: 8921.214306
+  type: 'test'
+  ...
+1..1
+# tests 1
+# suites 0
+# pass 1
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 9520.173624

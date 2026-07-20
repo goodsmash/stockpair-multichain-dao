@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "release": "StockPair App v0.8.0 Robinhood-native integration",
+  "protocolRelease": "StockPair Protocol v0.6.0 (unchanged)",
+  "status": "PASS_WITH_EXTERNAL_PRODUCTION_GATES",
+  "verifiedAt": "2026-07-19T19:46:00Z",
+  "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392",
+  "newV080Checks": {
+    "robinhoodNativeTests": { "status": "PASS", "tests": 15, "evidence": "qa/verification-logs-v0.8.0/final-quick.log" },
+    "uiSecurityAccessibilityTests": { "status": "PASS", "tests": 7, "evidence": "qa/verification-logs-v0.8.0/final-quick.log" },
+    "localNativeApiAndCliSmoke": { "status": "PASS", "evidence": "qa/demo-smoke-v0.8.0/summary.json" },
+    "productionWebBuild": { "status": "PASS", "evidence": "qa/verification-logs-v0.8.0/final-quick.log" },
+    "rootRuntimeDependencyAudit": { "status": "PASS", "vulnerabilities": 0, "evidence": "qa/verification-logs-v0.8.0/root-runtime-audit.json" },
+    "webRuntimeDependencyAudit": { "status": "PASS", "vulnerabilities": 0, "evidence": "qa/verification-logs-v0.8.0/web-runtime-audit.json" },
+    "robinhoodChainKitPackage": { "status": "PASS", "version": "0.8.0", "evidence": "qa/verification-logs-v0.8.0/robinhood-kit-pack.json" },
+    "launchIntelligenceSdkPackage": { "status": "PASS", "version": "0.8.0", "evidence": "qa/verification-logs-v0.8.0/launch-sdk-pack.json" }
+  },
+  "completeQuickSuite": {
+    "status": "PASS",
+    "ammAndLiquidityPropertyCases": 160000,
+    "solidityFiles": 37,
+    "staticAuditSourceFiles": 53,
+    "scannerRegressions": 8,
+    "scoutDeploymentTests": 1,
+    "indexerPerimeterTests": 3,
+    "launchIntelligenceTests": 14,
+    "robinhoodNativeTests": 15,
+    "uiTests": 7,
+    "evidence": "qa/verification-logs-v0.8.0/final-quick.log"
+  },
+  "inheritedProtocolEvidence": {
+    "status": "UNCHANGED_AND_SOURCE_MATCHED",
+    "note": "No Solidity source or protocol identifier changed in v0.8. The source-matched compiler artifacts and browser ABI passed validation. The existing isolated 13/13 v0.6 deployed-bytecode evidence is included but was not re-executed solely for this read-only application/indexer release.",
+    "evidence": [
+      "RELEASE_VERIFICATION.json",
+      "qa/verification-logs-v0.6.0/e2e-summary.json"
+    ]
+  },
+  "implementedCapabilities": [
+    "reviewed Robinhood mainnet/testnet network and protocol-contract registry",
+    "ERC-8056 corporate-action snapshots and integer-safe display helpers",
+    "24/5 oracle heartbeat, sequencer uptime/grace and oraclePaused fail-closed checks",
+    "conservative finalized-tag transaction status",
+    "Nitro gas and Ethereum-difference guidance",
+    "unsigned L1-to-L2 retryable-ticket plans",
+    "unsigned L2-to-L1 ArbSys/Outbox plans",
+    "canonical bridge routing plans",
+    "ERC-4337 v0.6/v0.7/v0.8 and EIP-7702 descriptors",
+    "bounded disabled-by-default AA/session policy schema",
+    "Nitro node, ArbOS and manual-upgrade posture",
+    "read-only SDK, CLI, OpenAPI, schemas, examples and responsive UI"
+  ],
+  "safetyInvariants": {
+    "readOnlyApi": true,
+    "privateKeysAccepted": false,
+    "transactionSigning": false,
+    "transactionBroadcasting": false,
+    "autoExecutionAllowed": false,
+    "dynamicStockTokenFeedsHardCoded": false,
+    "publicSharedRpcConsideredProductionReady": false,
+    "automaticNodeUpgradeAllowed": false
+  },
+  "externalProductionGates": [
+    "revalidate every reviewed contract/address/version against current official Robinhood documentation",
+    "ingest and authenticate the current official stock-token registry and Chainlink feed/heartbeat registry",
+    "deploy and test against Robinhood Chain testnet with a dedicated authenticated RPC",
+    "execute real two-chain retryable and Outbox integration tests using test assets",
+    "validate provider finalized-tag semantics and add L1 batch-posting proof telemetry",
+    "integrate a reviewed bundler/paymaster only through bounded policies",
+    "operate and monitor a real Nitro node before relying on node posture",
+    "complete independent smart-contract, frontend, infrastructure, economic and legal/compliance reviews"
+  ],
+  "limitations": [
+    "No live Robinhood Chain deployment or real bridge/message transaction was performed.",
+    "The official stock-token and Chainlink feed lists are dynamic and intentionally not bundled as production truth.",
+    "The integration does not sign, sponsor or broadcast UserOperations or transactions.",
+    "The local smoke uses chain 31337 and correctly reports it as absent from the reviewed Robinhood registry."
+  ]
+}

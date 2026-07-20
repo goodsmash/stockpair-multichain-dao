@@ -1,0 +1,372 @@
+{
+  "release": "0.9.0",
+  "protocolVersion": "0.6.0",
+  "status": "PASS_WITH_EXTERNAL_PRODUCTION_GATES",
+  "generatedAt": "2026-07-19T21:53:59.554Z",
+  "sourceBundleSha256": "daade5864852d24403d5c6c90faddf19fd13add995a0a8dbf1056d2056f5a392",
+  "verified": {
+    "reproducibleWorkspace": {
+      "status": "PASS",
+      "node": "22.16.0",
+      "npm": "10.9.2",
+      "singleRootLockfile": true,
+      "cleanInstall": {
+        "ok": true,
+        "release": "0.9.0",
+        "node": "v22.16.0",
+        "packageManager": "npm@10.9.2",
+        "isolatedDependencyState": true,
+        "excludedFromCopy": [
+          "node_modules",
+          ".git",
+          "dist",
+          "deployments",
+          ".env.local"
+        ],
+        "commands": [
+          {
+            "command": "npm ci --ignore-scripts --no-audit --no-fund",
+            "status": "PASS",
+            "durationMs": 12967
+          },
+          {
+            "command": "npm run doctor",
+            "status": "PASS",
+            "durationMs": 316
+          },
+          {
+            "command": "npm run validate:artifacts",
+            "status": "PASS",
+            "durationMs": 278
+          },
+          {
+            "command": "npm run test:ui",
+            "status": "PASS",
+            "durationMs": 1085
+          },
+          {
+            "command": "npm run build:web",
+            "status": "PASS",
+            "durationMs": 3301
+          }
+        ],
+        "checkedAt": "2026-07-19T21:42:38.253Z"
+      }
+    },
+    "quickSuite": {
+      "status": "PASS",
+      "ammAndLiquidityCases": 160000,
+      "solidityStructureFiles": 39,
+      "staticSecurityFiles": 61,
+      "scannerTests": 8,
+      "scoutTests": 1,
+      "indexerPerimeterTests": 6,
+      "launchIntelligenceTests": 15,
+      "robinhoodNativeTests": 16,
+      "reputationAndAlertTests": 4,
+      "directRpcDexTests": 3,
+      "uiSecurityAccessibilityTests": 12,
+      "typescriptBuild": true,
+      "productionCspBuild": true,
+      "log": "qa/verification-logs-v0.9.0/quick-release-final.log"
+    },
+    "deployedBytecode": {
+      "status": "PASS",
+      "scenarioCount": 13,
+      "passed": 13,
+      "failed": 0,
+      "scenarios": [
+        {
+          "name": "lifecycle",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 27837.984994,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/01-lifecycle.log",
+          "sha256": "4c7e931ebb4276556939e0de9f77dd45727ed17783af2db33f33fdcb860df490"
+        },
+        {
+          "name": "incident-exit",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 30325.493089,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/02-incident-exit.log",
+          "sha256": "d1aff4a7c94328623c9ba63f8aefcc4110ed99343ccfb6dde1281ec0a394a7bd"
+        },
+        {
+          "name": "delist-exit",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 27993.062049,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/03-delist-exit.log",
+          "sha256": "873344100dbf6f4446ef45d1756b29ef9a758c8827cfcc9a6c8e0db1158eb01a"
+        },
+        {
+          "name": "creator-bounds",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 22509.415862,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/04-creator-bounds.log",
+          "sha256": "6b1d0ef115df3cfe0e02bec7fc59e0d160c73cc6526216d50c8915812d6417e6"
+        },
+        {
+          "name": "fee-token",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 16417.615737,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/05-fee-token.log",
+          "sha256": "49d4abdeb1c6b791511cc37e365adb6df8dafe1c68f77c297bcd4e7cf871bb8b"
+        },
+        {
+          "name": "reentrancy",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 20170.738437,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/06-reentrancy.log",
+          "sha256": "d3ab44b2d8f9d5356efdb714e0bbac4383b910fe922c4bdebddf75a328526b47"
+        },
+        {
+          "name": "oracle",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 18177.839084,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/07-oracle.log",
+          "sha256": "db665d7ec02c108672c0e769fff1c5cde90512c70d5807ae3f0436892605e720"
+        },
+        {
+          "name": "bytecode-policy",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 17337.339361,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/08-bytecode-policy.log",
+          "sha256": "b9aeec17dc71b5882f898691160f7124f60b96e27d2e35ee33641fd43b2fa922"
+        },
+        {
+          "name": "frontend-compromise",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 26931.301845,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/09-frontend-compromise.log",
+          "sha256": "29e887af5671d44f602ad46a0dea051e5f3a4d75cd067ceeb809d3ad34216332"
+        },
+        {
+          "name": "eligibility-governance",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 15949.113769,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/10-eligibility-governance.log",
+          "sha256": "450d40bcf8a1098876c78518c9022e47a4cf5d24a6b2a4f340d094d61a85fbc1"
+        },
+        {
+          "name": "security-timelock",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 9441.824532,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/11-security-timelock.log",
+          "sha256": "6706243ac8bb91129505a8fa7b57854acf0c67616f87c27656bcdeea4690e59d"
+        },
+        {
+          "name": "security-assets",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 11509.964147,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/12-security-assets.log",
+          "sha256": "5c4d199f5f50a4fa8e33791ec7b1c955ade7b77ea68dd45a3f21208b81c016d9"
+        },
+        {
+          "name": "security-controls",
+          "status": "PASS",
+          "tests": 1,
+          "pass": 1,
+          "fail": 0,
+          "durationMs": 28248.48321,
+          "log": "qa/verification-logs-v0.9.0/e2e-final/13-security-controls.log",
+          "sha256": "37ce3fdf1b0e139dcf9ae6af0ab17564da09aa900d30e984863c993ace3eb5d2"
+        }
+      ]
+    },
+    "directRpcVercel": {
+      "status": "PASS",
+      "indexerConfigured": false,
+      "directRpcFallback": true,
+      "lookbackBlocks": 100,
+      "localhostIndexerAbsent": true,
+      "operationsEnabled": false,
+      "externalDexAdapters": 0,
+      "outputFiles": [
+        {
+          "path": "apps/web/dist/index.html",
+          "size": 2106,
+          "sha256": "06d0f5ef61eef20619b4a3731c390c30de023eadb39f1703211ee1355a383f68"
+        },
+        {
+          "path": "apps/web/dist/assets/ccip-DF31yZqm.js",
+          "size": 2863,
+          "sha256": "74da390ffd431bd3d2a5806648028d77b0656cf7760a8618f65857981784a1c1"
+        },
+        {
+          "path": "apps/web/dist/assets/index-DfxdoVY4.js",
+          "size": 317733,
+          "sha256": "a2b40414ceb6fb50f8a28cc12f67ff1e4013e96dc5949d3930449bf340ab93e1"
+        },
+        {
+          "path": "apps/web/dist/assets/index-DjMRkxDY.css",
+          "size": 54803,
+          "sha256": "21eccd9a28ad67c5e0335b61481288133aff3d3af251794bcf3911fd1b14086b"
+        },
+        {
+          "path": "apps/web/dist/assets/localBatchGatewayRequest-Bzx1RM9T.js",
+          "size": 106679,
+          "sha256": "df5cf5a20e80827461704def4397b60a83a378f39dc31b99181f3d85eee2f923"
+        },
+        {
+          "path": "apps/web/dist/assets/secp256k1-BNHPt8Gq.js",
+          "size": 30036,
+          "sha256": "9dc7f55d72f551593d28e7fbef13c87021566d91f0f9e85da1dd022a9237c4bd"
+        },
+        {
+          "path": "apps/web/dist/assets/utils-Bpv4vmSW.js",
+          "size": 2194,
+          "sha256": "5114638bb111b647e478a947be5beed5558487685dc8284144566df3fc03d851"
+        }
+      ]
+    },
+    "localStack": {
+      "status": "PASS",
+      "summary": {
+        "ok": true,
+        "release": "0.9.0",
+        "apiVersion": "0.9.0",
+        "chainId": 31337,
+        "factory": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
+        "protocolVersion": "0x154b42508933d53fbe3cac1f7e0e8ccf4a36169ed150f9171e2fae441e220309",
+        "launchCount": 1,
+        "scout": {
+          "enabled": true,
+          "running": true,
+          "startedAt": "2026-07-19T21:43:22.580Z",
+          "lastError": null,
+          "pollIntervalMs": 12000,
+          "coverage": [
+            {
+              "chainId": 31337,
+              "name": "StockPair Local",
+              "explorerUrl": "http://127.0.0.1:8545",
+              "rpc": "http://127.0.0.1:8545",
+              "head": "14",
+              "pendingFeed": false
+            }
+          ],
+          "counts": {
+            "contracts": 4,
+            "tokens": 1,
+            "pools": 0,
+            "swaps": 0,
+            "deployers": 1,
+            "codeFamilies": 4,
+            "publicLabels": 1
+          },
+          "limitation": "Coverage is complete only for configured RPC/archive endpoints and indexed block ranges. Public labels are evidence records, not private identity claims. Pending visibility requires a provider that exposes pending transactions."
+        },
+        "radarCandidateCount": 1,
+        "alerts": {
+          "delivery": {
+            "enabled": false,
+            "queued": 0,
+            "working": false,
+            "delivered": 0,
+            "failed": 0,
+            "lastError": null,
+            "lastDeliveredAt": null,
+            "targets": {
+              "webhook": false,
+              "discord": false,
+              "telegram": false
+            }
+          },
+          "protocol": {
+            "enabled": true,
+            "running": false,
+            "lastBlock": "14",
+            "pools": 1,
+            "emitted": 0,
+            "lastError": null,
+            "largeSwapThresholdBps": 100
+          }
+        },
+        "sseContentType": true,
+        "uiDelivered": true,
+        "checkedAt": "2026-07-19T21:43:43.562Z",
+        "finalReadinessLog": "qa/demo-smoke-v0.9.0/demo-final.log"
+      }
+    },
+    "dependencyAudit": {
+      "status": "PASS",
+      "productionVulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      },
+      "dependencies": {
+        "prod": 23,
+        "dev": 103,
+        "optional": 57,
+        "peer": 20,
+        "peerOptional": 0,
+        "total": 145
+      }
+    },
+    "integrationFiles": {
+      "status": "PASS",
+      "openApiVersion": "0.9.0",
+      "hostedTemplates": [
+        "Render YAML",
+        "Fly TOML",
+        "Railway JSON"
+      ],
+      "machineBuildList": "integrations/v0.9-build-list.json"
+    },
+    "alertAndTradeBoundaries": {
+      "status": "PASS",
+      "externalDexDefault": "disabled-until-runtime-hash-pinned",
+      "quickBuy": "explicit-wallet-signature",
+      "alertDelivery": "disabled-by-default-server-side-HMAC",
+      "emailService": false
+    }
+  },
+  "externalGates": [
+    "No hosted indexer provider deployment was executed.",
+    "No Robinhood mainnet or testnet contract deployment was executed.",
+    "No external DEX adapter was production-enabled or live-traded.",
+    "No first real-value StockPair market was created.",
+    "Independent smart-contract, economic, frontend, infrastructure and legal/compliance review remains mandatory.",
+    "Persistent database/reorg recovery, provider SLAs and physical-device browser testing remain external production gates."
+  ],
+  "excludedScope": "Stake Engine reference was accidental and is not part of this release."
+}

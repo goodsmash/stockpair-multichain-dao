@@ -1,0 +1,67 @@
+{
+  "contractName": "MockInvalidOpcodeBypass",
+  "sourceName": "src/mocks/MockInvalidOpcodeBypass.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ],
+  "bytecode": "0x6080604052346101115760405160c081016001600160401b038111828210176100fd5760405260a08082526020820191903683378051156100e957606082538051600110156100e957600460218201538051600210156100e957605660228201538051600310156100e95760fe60238201538051600410156100e957605b60248201538051600510156100e957606060258201538051600610156100e9575f60268201538051600710156100e957606060278201538051600810156100e9575f60288201538051600910156100e95760f460298201538051600a10156100e9575f602a8201535190f35b634e487b7160e01b5f52603260045260245ffd5b634e487b7160e01b5f52604160045260245ffd5b5f80fdfe",
+  "deployedBytecode": "0x5f80fdfea164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        }
+      ],
+      "devdoc": {
+        "details": "Deploys crafted runtime that jumps over INVALID and reaches DELEGATECALL. The old scanner incorrectly stopped at byte 3 and missed byte 9.",
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/mocks/MockInvalidOpcodeBypass.sol": "MockInvalidOpcodeBypass"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/mocks/MockInvalidOpcodeBypass.sol": {
+        "keccak256": "0xfb87c2a317f95c9525eed36c69a77deb02195b5ac122de7cd34c57ddb6519872",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://7e68bc706f4fb50b4a0b0544e674c6889eee69edb5e368207cd0668d047aaaa1",
+          "dweb:/ipfs/QmNbutzgBsnF59vfVkih538fKwRV99mriESAL9g95zYRBr"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

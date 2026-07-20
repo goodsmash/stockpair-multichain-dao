@@ -1,0 +1,16 @@
+.git
+.github
+apps
+node_modules
+qa
+docs
+src
+test
+script
+scripts
+out
+cache
+broadcast
+.env*
+*.zip
+*.log

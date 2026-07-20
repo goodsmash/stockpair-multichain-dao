@@ -1,0 +1,112 @@
+{
+  "version": "0.9.0",
+  "rules": {
+    "privateKeys": "forbidden",
+    "transactionBroadcast": "requires explicit user authorization",
+    "frontRunning": "forbidden",
+    "antiBotBypass": "forbidden"
+  },
+  "tasks": [
+    {
+      "id": "P0-001",
+      "priority": "P0",
+      "title": "Persist canonical block hashes and rewind on reorg",
+      "acceptance": [
+        "idempotent events",
+        "orphan reversal",
+        "restart recovery"
+      ]
+    },
+    {
+      "id": "P0-002",
+      "priority": "P0",
+      "title": "Add Robinhood WebSocket and sequencer-feed observer",
+      "acceptance": [
+        "provisional state",
+        "canonical reconciliation",
+        "lag metrics"
+      ]
+    },
+    {
+      "id": "P0-003",
+      "priority": "P0",
+      "title": "Add Uniswap v4 PoolManager adapter",
+      "acceptance": [
+        "Initialize decode",
+        "hook scan",
+        "dynamic-fee warning",
+        "approved manager hash"
+      ]
+    },
+    {
+      "id": "P1-001",
+      "priority": "P1",
+      "title": "Add bonding-curve lifecycle adapter",
+      "acceptance": [
+        "curve progress",
+        "virtual reserves",
+        "graduation proof",
+        "canonical pool"
+      ]
+    },
+    {
+      "id": "P1-002",
+      "priority": "P1",
+      "title": "Add LBP lifecycle adapter",
+      "acceptance": [
+        "weights",
+        "time window",
+        "real versus virtual collateral",
+        "settlement state"
+      ]
+    },
+    {
+      "id": "P1-003",
+      "priority": "P1",
+      "title": "Add wash-trading and common-funder signals",
+      "acceptance": [
+        "self trade",
+        "matched flow",
+        "circular flow",
+        "explainable evidence"
+      ],
+      "status": "implemented-basic-heuristics-v0.9"
+    },
+    {
+      "id": "P1-004",
+      "priority": "P1",
+      "title": "Add signed webhook delivery",
+      "acceptance": [
+        "HMAC",
+        "retries",
+        "dead-letter queue",
+        "no secrets in payload"
+      ],
+      "status": "implemented-v0.9"
+    },
+    {
+      "id": "P2-001",
+      "priority": "P2",
+      "title": "Add guarded unsigned execution plans",
+      "acceptance": [
+        "direct-chain refresh",
+        "simulation",
+        "policy blockers",
+        "explicit signature"
+      ],
+      "status": "implemented-browser-review-v0.9"
+    },
+    {
+      "id": "P2-002",
+      "priority": "P2",
+      "title": "Add bounded ERC-4337 session keys",
+      "acceptance": [
+        "allowlisted contracts/functions",
+        "daily cap",
+        "expiry",
+        "revocation"
+      ]
+    }
+  ],
+  "releaseNotes": "Current completed build-list mapping is integrations/v0.9-build-list.json. Remaining tasks below are future durable/low-latency extensions."
+}

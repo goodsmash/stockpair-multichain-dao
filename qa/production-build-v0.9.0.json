@@ -1,0 +1,50 @@
+{
+  "ok": true,
+  "release": "0.9.0",
+  "mode": "production",
+  "chainId": 46630,
+  "indexerConfigured": false,
+  "directRpcFallback": true,
+  "lookbackBlocks": 100,
+  "operationsEnabled": false,
+  "externalDexAdapters": 0,
+  "localhostIndexerAbsent": true,
+  "outputFiles": [
+    {
+      "path": "apps/web/dist/index.html",
+      "size": 2106,
+      "sha256": "06d0f5ef61eef20619b4a3731c390c30de023eadb39f1703211ee1355a383f68"
+    },
+    {
+      "path": "apps/web/dist/assets/ccip-DF31yZqm.js",
+      "size": 2863,
+      "sha256": "74da390ffd431bd3d2a5806648028d77b0656cf7760a8618f65857981784a1c1"
+    },
+    {
+      "path": "apps/web/dist/assets/index-DfxdoVY4.js",
+      "size": 317733,
+      "sha256": "a2b40414ceb6fb50f8a28cc12f67ff1e4013e96dc5949d3930449bf340ab93e1"
+    },
+    {
+      "path": "apps/web/dist/assets/index-DjMRkxDY.css",
+      "size": 54803,
+      "sha256": "21eccd9a28ad67c5e0335b61481288133aff3d3af251794bcf3911fd1b14086b"
+    },
+    {
+      "path": "apps/web/dist/assets/localBatchGatewayRequest-Bzx1RM9T.js",
+      "size": 106679,
+      "sha256": "df5cf5a20e80827461704def4397b60a83a378f39dc31b99181f3d85eee2f923"
+    },
+    {
+      "path": "apps/web/dist/assets/secp256k1-BNHPt8Gq.js",
+      "size": 30036,
+      "sha256": "9dc7f55d72f551593d28e7fbef13c87021566d91f0f9e85da1dd022a9237c4bd"
+    },
+    {
+      "path": "apps/web/dist/assets/utils-Bpv4vmSW.js",
+      "size": 2194,
+      "sha256": "5114638bb111b647e478a947be5beed5558487685dc8284144566df3fc03d851"
+    }
+  ],
+  "builtAt": "2026-07-19T21:52:33.391Z"
+}

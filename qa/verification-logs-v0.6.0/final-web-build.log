@@ -1,0 +1,22 @@
+
+> robinhood-stock-pair-launchpad-web@0.6.0 build
+> npm run check && vite build && node scripts/harden-dist.mjs
+
+
+> robinhood-stock-pair-launchpad-web@0.6.0 check
+> tsc --noEmit
+
+[36mvite v8.1.5 [32mbuilding client environment for production...[36m[39m
+[2Ktransforming...✓ 418 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                     1.73 kB │ gzip:  0.75 kB
+dist/assets/index-BEWbIB7e.css                     47.93 kB │ gzip: 10.76 kB
+dist/assets/utils-Bpv4vmSW.js                       2.19 kB │ gzip:  0.97 kB
+dist/assets/ccip-CsPHpuad.js                        2.86 kB │ gzip:  1.32 kB
+dist/assets/secp256k1-BNHPt8Gq.js                  30.03 kB │ gzip: 12.01 kB
+dist/assets/localBatchGatewayRequest-BQmdb490.js  106.64 kB │ gzip: 30.36 kB
+dist/assets/index-DbzESIis.js                     261.34 kB │ gzip: 70.00 kB
+
+[32m✓ built in 726ms[39m
+Production dist CSP hardened for 'self', https://rpc.testnet.chain.robinhood.com, wss://rpc.testnet.chain.robinhood.com

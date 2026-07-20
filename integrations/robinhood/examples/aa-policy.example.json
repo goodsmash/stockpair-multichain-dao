@@ -1,0 +1,13 @@
+{
+  "enabled": false,
+  "entryPointVersion": "0.8",
+  "allowedTargets": [],
+  "allowedSelectors": [],
+  "maxValuePerCall": "0",
+  "maxTotalValue": "0",
+  "expiresAt": null,
+  "privateKeyStorageAllowed": false,
+  "userSignatureRequired": true,
+  "autoExecutionAllowed": false,
+  "revocationRequired": true
+}

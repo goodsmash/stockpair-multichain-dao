@@ -1,0 +1,112 @@
+{
+  "contractName": "IStockCoinPolicy",
+  "sourceName": "src/interfaces/IStockCoinPolicy.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "stockToken",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "actor",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "recipient",
+          "type": "address"
+        },
+        {
+          "internalType": "uint8",
+          "name": "action",
+          "type": "uint8"
+        }
+      ],
+      "name": "assertActionAllowed",
+      "outputs": [],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x",
+  "deployedBytecode": "0x",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "stockToken",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "actor",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint8",
+              "name": "action",
+              "type": "uint8"
+            }
+          ],
+          "name": "assertActionAllowed",
+          "outputs": [],
+          "stateMutability": "view",
+          "type": "function"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/interfaces/IStockCoinPolicy.sol": "IStockCoinPolicy"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/interfaces/IStockCoinPolicy.sol": {
+        "keccak256": "0x785d62ca2e17e0f57b48ee3c73b95ce65d5a465545d7314f04d4cebda747d285",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://5fd7e3002024f64648fa21c8a16137cca68b3212dab5d3079533f3e743d1a6a7",
+          "dweb:/ipfs/QmQmGi8oErXtTxx12eJA65FDpxdmdbTiTEA9aYs76MUmqB"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

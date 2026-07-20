@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+content-type: text/event-stream; charset=utf-8
+cache-control: no-cache, no-transform
+x-content-type-options: nosniff
+x-frame-options: DENY
+referrer-policy: no-referrer
+permissions-policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), serial=()
+cross-origin-opener-policy: same-origin
+cross-origin-resource-policy: cross-origin
+x-stockpair-api-version: 0.6.0
+content-security-policy: default-src 'none'; frame-ancestors 'none'; base-uri 'none'
+connection: keep-alive
+x-accel-buffering: no
+Date: Sun, 19 Jul 2026 17:57:46 GMT
+Transfer-Encoding: chunked
+

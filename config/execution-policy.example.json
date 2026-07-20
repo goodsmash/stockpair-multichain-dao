@@ -1,0 +1,14 @@
+{
+  "mode": "review-only",
+  "enabled": false,
+  "requireSimulation": true,
+  "requireDirectChainRefresh": true,
+  "requireVerifiedFactory": true,
+  "maxRiskScore": 20,
+  "maxSlippageBps": 100,
+  "maxPositionBps": 50,
+  "maxDailySpend": "0",
+  "cooldownSeconds": 30,
+  "minLiquidity": "0",
+  "allowedChainIds": [46630]
+}

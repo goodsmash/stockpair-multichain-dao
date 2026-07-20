@@ -1,0 +1,128 @@
+{
+  "version": "0.9.0",
+  "scope": "Robinhood Chain launchpad only; Stake Engine reference excluded",
+  "completed": [
+    {
+      "id": "P0-1",
+      "title": "Direct RPC fallback for production views",
+      "status": "PASS",
+      "evidence": [
+        "apps/web/src/lib/direct-rpc.ts",
+        "apps/web/src/main.ts",
+        "qa/production-build-v0.9.0.json"
+      ],
+      "limits": "Recent deployment bootstrap is bounded to 100 blocks; durable history requires the hosted indexer."
+    },
+    {
+      "id": "P0-2",
+      "title": "Hosted indexer deployment templates",
+      "status": "READY_NOT_DEPLOYED",
+      "evidence": [
+        "deploy/hosted/render.yaml",
+        "deploy/hosted/fly.toml",
+        "deploy/hosted/railway.json",
+        "docs/DIRECT_RPC_AND_HOSTED_INDEXER.md"
+      ],
+      "limits": "No provider account was authorized, so no public service URL is claimed."
+    },
+    {
+      "id": "P1-3",
+      "title": "Reviewed V2/V3 DEX quoting and user-signed execution",
+      "status": "IMPLEMENTED_DISABLED_BY_DEFAULT",
+      "evidence": [
+        "apps/web/src/lib/dex.ts",
+        "apps/web/scripts/direct-dex-runtime.test.mjs",
+        "docs/EXTERNAL_DEX_EXECUTION.md"
+      ],
+      "limits": "Production adapters require independently reviewed canonical addresses and runtime hashes."
+    },
+    {
+      "id": "P1-4",
+      "title": "Fast launch review and Quick Buy",
+      "status": "IMPLEMENTED_USER_SIGNED",
+      "evidence": [
+        "apps/web/src/main.ts",
+        "apps/web/src/style.css"
+      ],
+      "limits": "No autonomous signing, front-running, sandwiching or anti-bot bypass."
+    },
+    {
+      "id": "P2-5",
+      "title": "Per-token safety scanner",
+      "status": "IMPLEMENTED_WITH_EVIDENCE_LIMITS",
+      "evidence": [
+        "apps/web/src/lib/direct-rpc.ts",
+        "services/indexer/src/risk.mjs",
+        "docs/SCANNER_AND_EXECUTION_GATE.md"
+      ],
+      "limits": "Holder/source evidence depends on configured explorer APIs; honeypot certainty is not claimed."
+    },
+    {
+      "id": "P2-6",
+      "title": "Deployer reputation",
+      "status": "IMPLEMENTED_HEURISTIC",
+      "evidence": [
+        "services/indexer/src/intelligence/reputation.mjs",
+        "services/indexer/src/server.mjs"
+      ],
+      "limits": "Known rug-pull status is unknown unless supplied by a reviewed evidence source."
+    },
+    {
+      "id": "P2-7",
+      "title": "Manipulation warnings",
+      "status": "IMPLEMENTED_HEURISTIC",
+      "evidence": [
+        "services/indexer/src/intelligence/reputation.mjs",
+        "apps/web/src/main.ts"
+      ],
+      "limits": "Self, reciprocal, circular and matched-size signals are warnings, not proof."
+    },
+    {
+      "id": "P4-10",
+      "title": "Signed webhook, Discord and Telegram delivery",
+      "status": "IMPLEMENTED_DISABLED_BY_DEFAULT",
+      "evidence": [
+        "services/indexer/src/alerts/delivery.mjs",
+        "services/indexer/src/alerts/protocol-monitor.mjs",
+        "docs/ALERT_DELIVERY.md"
+      ],
+      "limits": "No user email service is included."
+    },
+    {
+      "id": "P4-11",
+      "title": "Watchlist persistence and event alerts",
+      "status": "PARTIAL_COMPLETE",
+      "evidence": [
+        "apps/web/src/main.ts"
+      ],
+      "limits": "Browser watchlists are local-only; hosted alerts are operator-configured, not per-user email subscriptions."
+    },
+    {
+      "id": "P5-12-14",
+      "title": "Responsive UI, real-time Radar and theme support",
+      "status": "PASS",
+      "evidence": [
+        "apps/web/src/style.css",
+        "apps/web/src/main.ts",
+        "apps/web/scripts/ui-contract.test.mjs"
+      ]
+    }
+  ],
+  "externalGates": [
+    {
+      "id": "P3-8",
+      "title": "Robinhood mainnet deployment",
+      "status": "NOT_EXECUTED_AUTHORIZATION_REQUIRED",
+      "evidence": [
+        "scripts/deploy-robinhood-mainnet.sh",
+        "script/DeployRobinhoodMainnet.s.sol",
+        "docs/MAINNET_DEPLOYMENT_RUNBOOK.md"
+      ]
+    },
+    {
+      "id": "P3-9",
+      "title": "First real StockPair market",
+      "status": "NOT_EXECUTED_DEPLOYMENT_REQUIRED"
+    }
+  ]
+}

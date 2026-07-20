@@ -1,0 +1,1 @@
+{"delivery":{"enabled":false,"queued":0,"working":false,"delivered":0,"failed":0,"lastError":null,"lastDeliveredAt":null,"targets":{"webhook":false,"discord":false,"telegram":false}},"protocol":{"enabled":true,"running":false,"lastBlock":"14","pools":1,"emitted":0,"lastError":null,"largeSwapThresholdBps":100}}

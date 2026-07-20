@@ -1,0 +1,18 @@
+StockPair v0.6.0 verification
+Status: PASS_WITH_EXTERNAL_AUDIT_TARGET_CHAIN_ACCOUNT_AND_MANAGED_BROWSER_GATES
+Generated: 2026-07-19T18:12:19.518Z
+
+Quick suite: PASS
+- 160,000 deterministic AMM/liquidity cases
+- 37 Solidity structure checks
+- 48 source static-security checks
+- 8 scanner regressions
+- 3 indexer perimeter regressions
+- 7 browser/UI security and accessibility tests
+- source/artifact/ABI, TypeScript, Vite and CSP checks
+
+Deployed-bytecode matrix: 13/13 PASS
+Local stack: PASS (factory hash/version, seeded launch, Scout, REST, SSE and UI HTTP)
+Production runtime dependency audits: 0 known vulnerabilities
+Managed browser screenshots/console: NOT EXECUTED — navigation blocked by environment policy
+Independent audits/live target-chain/account deployments: NOT EXECUTED

@@ -1,0 +1,28 @@
+{
+  "rules": [
+    {
+      "id": "high-confidence-new-pool",
+      "enabled": true,
+      "chainIds": [46630],
+      "minScore": 70,
+      "maxRiskScore": 20,
+      "minVerifiedPools": 1,
+      "minSwaps": 1,
+      "maxAgeMinutes": 120,
+      "requirePublicEvidence": false,
+      "actions": ["ui", "webhook"]
+    },
+    {
+      "id": "manual-review-new-token",
+      "enabled": true,
+      "chainIds": [46630],
+      "minScore": 45,
+      "maxRiskScore": 40,
+      "minVerifiedPools": 0,
+      "minSwaps": 0,
+      "maxAgeMinutes": 30,
+      "requirePublicEvidence": false,
+      "actions": ["ui"]
+    }
+  ]
+}

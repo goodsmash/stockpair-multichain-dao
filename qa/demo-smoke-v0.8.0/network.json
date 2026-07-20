@@ -1,0 +1,1 @@
+{"registryVersion":"1.0.0","reviewedAt":"2026-07-19","known":false,"profile":null,"configuredEndpoint":"http://127.0.0.1:8545","publicSharedRpc":false,"productionReadyRpc":true,"expectedArbOsVersion":61,"warnings":["Revalidate this reviewed registry against the official Robinhood documentation before every production deployment."]}

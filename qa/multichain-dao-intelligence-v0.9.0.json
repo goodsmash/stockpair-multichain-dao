@@ -1,0 +1,65 @@
+{
+  "release": "0.9.0",
+  "generatedAt": "2026-07-20T09:16:17Z",
+  "scope": "multichain-dao-intelligence-extension",
+  "status": "PASS_WITH_EXTERNAL_PRODUCTION_GATES",
+  "verification": {
+    "testQuick": "passed",
+    "checkRelease": "passed",
+    "typescriptProductionBuild": "passed",
+    "vercelProductionBuildWithBlankIndexer": "retained-and-source-guarded",
+    "ammLiquidityCases": 160000,
+    "solidityFilesChecked": 39,
+    "sourceFilesStaticChecked": 62,
+    "scannerTests": 8,
+    "scoutIntegrationTests": 1,
+    "scoutRegressionCoverage": [
+      "confirmed deployment detection",
+      "ERC-20 metadata",
+      "direct-address scan",
+      "next-block contract call activity",
+      "fresh block-number reads"
+    ],
+    "indexerSecurityTests": 6,
+    "intelligenceTests": 15,
+    "robinhoodTests": 16,
+    "liveIntelligenceTests": 7,
+    "multichainDaoTests": 3,
+    "directDexTests": 4,
+    "uiTests": 13,
+    "cleanInstallRetest": {
+      "status": "INCONCLUSIVE_ENVIRONMENT_TIMEOUT",
+      "detail": "The isolated npm ci process stalled and was terminated. No fresh clean-install pass is claimed for this extension.",
+      "baselineEvidence": "qa/clean-install-v0.9.0.json"
+    }
+  },
+  "capabilities": {
+    "configuredEvmChainHealth": true,
+    "continuousConfirmedDeploymentDiscovery": true,
+    "directConfiguredChainAddressScan": true,
+    "contractActivityTracking": true,
+    "daoGovernanceFingerprinting": true,
+    "daoDormancyHeuristics": true,
+    "liquidityRemovalAlerts": true,
+    "manualOpportunityQueues": true,
+    "autonomousSigning": false,
+    "privateKeyCustody": false,
+    "frontRunningOrSandwiching": false
+  },
+  "externalGates": {
+    "hostedIndexerDeployed": false,
+    "dedicatedArchiveProvidersConfiguredForEveryChain": false,
+    "websocketProvidersConfiguredForEveryChain": false,
+    "historicalBackfillCompletedForEveryChain": false,
+    "canonicalDexRuntimePinsVerifiedForEveryChain": false,
+    "mainnetTransactionsBroadcast": false,
+    "independentAuditCompleted": false,
+    "legalAuthorizationCompleted": false
+  },
+  "limitations": [
+    "All-chain coverage means only explicitly configured EVM chains backed by reliable archive/history providers and persistent checkpoints.",
+    "Dormancy and abandoned-DAO results are evidence-based candidates, not ownership, recoverability, legal status, or permission to use assets.",
+    "Scanner and AI-style auditor outputs are deterministic heuristics and external evidence summaries, not security guarantees.",
+    "Execution remains non-custodial, user-reviewed and wallet-signed."
+  ]
+}

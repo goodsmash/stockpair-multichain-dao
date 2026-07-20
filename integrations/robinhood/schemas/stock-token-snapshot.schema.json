@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/stock-token-snapshot.schema.json",
+  "title": "Robinhood Stock Token safety snapshot",
+  "type": "object",
+  "required": ["chainId", "token", "corporateAction", "oracle", "execution"],
+  "properties": {
+    "chainId": { "type": "integer", "minimum": 1 },
+    "token": { "type": "object", "required": ["address"] },
+    "corporateAction": { "type": "object" },
+    "oracle": { "type": ["object", "null"] },
+    "sequencer": { "type": ["object", "null"] },
+    "execution": {
+      "type": "object",
+      "required": ["eligible", "blockers"],
+      "properties": {
+        "eligible": { "type": "boolean" },
+        "blockers": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

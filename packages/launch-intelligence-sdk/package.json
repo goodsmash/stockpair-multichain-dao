@@ -1,0 +1,22 @@
+{
+  "name": "@stockpair/launch-intelligence-sdk",
+  "version": "0.9.0",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./src/index.js"
+    }
+  },
+  "files": [
+    "src",
+    "bin",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=22.12 <23"
+  },
+  "bin": {
+    "stockpair-radar": "./bin/stockpair-radar.mjs"
+  }
+}

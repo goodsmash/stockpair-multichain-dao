@@ -1,0 +1,5 @@
+package/src/index.js
+package/package.json
+package/README.md
+package/bin/stockpair-radar.mjs
+package/src/index.d.ts

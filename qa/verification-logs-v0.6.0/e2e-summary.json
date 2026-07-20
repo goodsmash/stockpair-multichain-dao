@@ -1,0 +1,127 @@
+{
+  "release": "0.6.0",
+  "generatedAt": "2026-07-19T18:07:16.501Z",
+  "passed": true,
+  "count": 13,
+  "passedCount": 13,
+  "results": [
+    {
+      "name": "launch-provenance-trade-vesting-lock",
+      "file": "e2e-lifecycle.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "764bd1343fb3f022c1ffaeea898a07cb4e34e987aaf4ed458fd59ddb4db83550",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "paused-self-exit",
+      "file": "e2e-incident-exit.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "36a68bc094bf94c7b1105be831b48b672aa1ab9aace397b913ddc3b3d4676000",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "delisted-self-exit",
+      "file": "e2e-delist-exit.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "1b7b1927d8679bef4df754c1240d0b18bc8732ac45c94f0f65fd74db0803d0e6",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "creator-cap-lock-floor",
+      "file": "e2e-creator-bounds.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "4dc12e85fa1dbe33deaaf803df5931c950738e2b445a780dd1cf723a11092554",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "fee-token-atomic-rejection",
+      "file": "e2e-fee-token.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "299da49d87978992148d0e62f6a854a570aff353f978883b2f3d36d2feeeb5c7",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "reentrancy-rejection",
+      "file": "e2e-reentrancy.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "a133b5839ee8d67ba682b5b69c6983600abeee4549cd887f836e03f073fce372",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "oracle-rejection",
+      "file": "e2e-oracle.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "d4c2104a3ec3346eb7b60cbbebe144d94a8d7a8fc20295f2a22cd4011cc36a6c",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "full-runtime-bytecode-evasion-rejection",
+      "file": "e2e-bytecode-policy.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "93658125467a5203c078c358902a88a55250636ad86f79bf72652d6cf678cc56",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "compromised-frontend-deadline-slippage-rejection",
+      "file": "e2e-frontend-compromise.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "8f3d1ba362e217cdfe5a15ec8509722480e0ba5f0656fa32770f682b384add75",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "eligibility-ownership-recovery-delay",
+      "file": "e2e-eligibility-governance.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "4ccc590fe68b1a39786f0cfb74365ba5f4894a4d0931a3bdfd1d96e39a163d55",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "admin-delay-guardian-cancel",
+      "file": "e2e-timelock.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "25630d1eab4df741f2c7bed0c02f22f668202d5456436860d8b5532dfdfb2a8a",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "strict-asset-proxy-rejection",
+      "file": "e2e-strict-assets.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "e15165c264c0217da6d02fe5087006766118c05bdf51429c47c4d396cec3938d",
+      "ganacheJavascriptFallback": true
+    },
+    {
+      "name": "vesting-minimum-value-self-recipient-max-swap",
+      "file": "e2e-security-controls.log",
+      "ok": true,
+      "pass": 1,
+      "fail": 0,
+      "sha256": "a6793cc839ce8b102509f8334478aea44a457086d8197173ccf8247128f3081a",
+      "ganacheJavascriptFallback": true
+    }
+  ],
+  "environmentNote": "Ganache emitted an optional native µWS compatibility warning under Node 22 and used its JavaScript fallback. Only completed TAP logs with a nonzero pass count and # fail 0 are counted."
+}

@@ -1,0 +1,1578 @@
+{
+  "contractName": "AttestedEligibilityGate",
+  "sourceName": "src/AttestedEligibilityGate.sol",
+  "compiler": "0.8.30+commit.73712a01.Emscripten.clang",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "initialOwner",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "initialAttestor",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "initialGuardian",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AdminActionAlreadyScheduled",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "expiresAt",
+          "type": "uint64"
+        }
+      ],
+      "name": "AdminActionExpired",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "AdminActionNotAllowed",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "readyAt",
+          "type": "uint64"
+        }
+      ],
+      "name": "AdminActionNotReady",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "AdminActionNotScheduled",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidAccount",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidAttestor",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidBatch",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "validUntil",
+          "type": "uint64"
+        }
+      ],
+      "name": "InvalidEligibilityExpiry",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "InvalidGuardian",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "NoPendingTransfer",
+      "type": "error"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint64",
+          "name": "expiresAt",
+          "type": "uint64"
+        }
+      ],
+      "name": "PendingTransferExpired",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "Unauthorized",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "UnauthorizedAttestor",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "UnauthorizedGuardian",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "ZeroAddress",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "AdminActionCanceled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "AdminActionExecuted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes4",
+          "name": "selector",
+          "type": "bytes4"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "readyAt",
+          "type": "uint64"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "expiresAt",
+          "type": "uint64"
+        }
+      ],
+      "name": "AdminActionScheduled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "attestor",
+          "type": "address"
+        }
+      ],
+      "name": "AttestorUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "validUntil",
+          "type": "uint64"
+        }
+      ],
+      "name": "EligibilityUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "denied",
+          "type": "bool"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "caller",
+          "type": "address"
+        }
+      ],
+      "name": "EmergencyDenialUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "guardian",
+          "type": "address"
+        }
+      ],
+      "name": "GuardianUpdated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "currentOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "canceledOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferCanceled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "currentOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "pendingOwner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "expiresAt",
+          "type": "uint64"
+        }
+      ],
+      "name": "OwnershipTransferStarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "ADMIN_DELAY",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "ADMIN_EXECUTION_GRACE",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_BATCH",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "MAX_ELIGIBILITY_DURATION",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "OWNERSHIP_ACCEPTANCE_WINDOW",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "PROTOCOL_VERSION",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "acceptOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "callData",
+          "type": "bytes"
+        }
+      ],
+      "name": "adminActionId",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "adminActionReadyAt",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "attestor",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        }
+      ],
+      "name": "cancelAdminAction",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "cancelOwnershipTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "clearEmergencyDeny",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "eligibleUntil",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "emergencyDenied",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "emergencyDeny",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "guardian",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "guardianCancelOwnershipTransfer",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "isEligible",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pendingOwner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "pendingOwnerExpiresAt",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "callData",
+          "type": "bytes"
+        }
+      ],
+      "name": "scheduleAdminAction",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "actionId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "uint64",
+          "name": "readyAt",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newAttestor",
+          "type": "address"
+        }
+      ],
+      "name": "setAttestor",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "internalType": "uint64",
+          "name": "validUntil",
+          "type": "uint64"
+        }
+      ],
+      "name": "setEligibility",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address[]",
+          "name": "accounts",
+          "type": "address[]"
+        },
+        {
+          "internalType": "uint64[]",
+          "name": "validUntil",
+          "type": "uint64[]"
+        }
+      ],
+      "name": "setEligibilityBatch",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newGuardian",
+          "type": "address"
+        }
+      ],
+      "name": "setGuardian",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "nextOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": "0x60803461016c57601f61136b38819003918201601f19168301916001600160401b038311848410176101705780849260609460405283398101031261016c5761004781610184565b61005f604061005860208501610184565b9301610184565b6001600160a01b0390911691821561015d575f80546001600160a01b0319168417815560405193907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e08180a36001600160a01b031690811561014e576001600160a01b031690811561013f57600280546001600160a01b0319908116831790915560038054909116831790557fd5d99e381ae1a48ea1fe28325462987c8204869c61d1468101524f97d94400115f80a27f6bb7ff33e730289800c62ad882105a144a74010d2bdbb9a942544a3005ad55bf5f80a26111d290816101998239f35b63a6c1146b60e01b5f5260045ffd5b63acec475360e01b5f5260045ffd5b63d92e233d60e01b5f5260045ffd5b5f80fd5b634e487b7160e01b5f52604160045260245ffd5b51906001600160a01b038216820361016c5756fe60806040526004361015610011575f80fd5b5f358060e01c806321c630e914610dc557806323452b9c14610d9c5780632ed0ebae14610d70578063452a932014610d485780634634edce14610d2b5780636608452714610c8057806366e305fd14610c0b57806367e05a8614610bea57806379ac51f714610bad57806379ba509714610afb5780637cedebc514610aba57806384f98da1146109555780638a0dac4a146108555780638da5cb5b1461082e57806392ffacac14610811578063950bff9f146107f65780639c15c674146107cd5780639f857a101461079a578063aa3aa46014610760578063afebef97146106a6578063c622a401146103ef578063cada25c21461067e578063d48cdd94146104da578063e30c3978146104b2578063e829b083146103f4578063ed823a44146103ef578063f2fde38b1461029e5763f5770b1f1461014e575f80fd5b3461029a57602036600319011261029a57610167610eff565b5f549091906001600160a01b0316330361028c576101843661101d565b90815f5260066020526001600160401b0360405f205416801561027957804210610263576101b96001600160401b0391610fb1565b1680421161024d5750815f52600660205260405f206001600160401b0319815416905563ffffffff60e01b16905f5160206111a65f395f51905f525f80a36001600160a01b0316801561023e57600280546001600160a01b031916821790557fd5d99e381ae1a48ea1fe28325462987c8204869c61d1468101524f97d94400115f80a2005b63acec475360e01b5f5260045ffd5b826372ec6fe960e01b5f5260045260245260445ffd5b8263445de55160e11b5f5260045260245260445ffd5b8263a3fa30d160e01b5f5260045260245ffd5b6282b42960e81b5f5260045ffd5b5f80fd5b503461029a57602036600319011261029a576102b8610eff565b5f549091906001600160a01b0316330361028c576102d53661101d565b90815f5260066020526001600160401b0360405f2054168015610279578042106102635761030a6001600160401b0391610fb1565b1680421161024d5750815f52600660205260405f206001600160401b0319815416905563ffffffff60e01b16905f5160206111a65f395f51905f525f80a36001600160a01b031680156103e05760015462093a8042018042116103cc5782906001600160401b0360a01b9060a01b169163ffffffff60e01b161717806001557f7c731d56666267b8b57eeaddc598a7bad37f556bd84279432a730db8df1a2859602060018060a01b035f5416926001600160401b036040519160a01c168152a3005b634e487b7160e01b5f52601160045260245ffd5b63d92e233d60e01b5f5260045ffd5b610f64565b3461029a57602036600319011261029a5760043560018060a01b035f54163314158061049d575b61048e57805f5260066020526001600160401b0360405f2054161561047c57805f52600660205260405f206001600160401b0319815416905533907fe971a7ca7d6685bceb000248b83931e43a9786695dd69aa6b617c777d92a04a45f80a3005b63a3fa30d160e01b5f5260045260245ffd5b63089866cd60e01b5f5260045ffd5b506003546001600160a01b031633141561041b565b3461029a575f36600319011261029a576001546040516001600160a01b039091168152602090f35b3461029a57604036600319011261029a576004356001600160401b03811161029a5761050a903690600401610f81565b6024356001600160401b03811161029a57610529903690600401610f81565b9260018060a01b035f541633141580610669575b61065a5782158015610650575b8015610646575b610637575f5b83811061056057005b806105926105796105746001948887610fd1565b610ff5565b61058c610587848a89610fd1565b611009565b9061114c565b6105a0610587828887610fd1565b828060a01b036105b4610574848988610fd1565b165f5260046020526001600160401b0360405f2091166001600160401b03198254161790556105e7610574828786610fd1565b7f889d4fcf941f62f2ba58151906fdfcf690f9e7c76882c57b70a221cdfbd78d6a6020610618610587858b8a610fd1565b926001600160401b0360405194168452858060a01b031692a201610557565b6333b094a160e01b5f5260045ffd5b5083831415610551565b5060c8831161054a565b6304daaa1160e41b5f5260045ffd5b506002546001600160a01b031633141561053d565b3461029a575f36600319011261029a576002546040516001600160a01b039091168152602090f35b3461029a57604036600319011261029a576106bf610eff565b602435906001600160401b0382169182810361029a575f546001600160a01b03163314158061074b575b61065a578161071b6020927f889d4fcf941f62f2ba58151906fdfcf690f9e7c76882c57b70a221cdfbd78d6a9461114c565b6001600160a01b03165f81815260048352604090819020805467ffffffffffffffff1916861790555193845292a2005b506002546001600160a01b03163314156106e9565b3461029a575f36600319011261029a5760206040517f31ce7c3469dd0a4b21e90c5bf36dfcb8560d5de52d2865d311aa39280659dd268152f35b3461029a57602036600319011261029a576004355f52600660205260206001600160401b0360405f205416604051908152f35b3461029a575f36600319011261029a5760206001600160401b0360015460a01c16604051908152f35b3461029a575f36600319011261029a57602060405160c88152f35b3461029a575f36600319011261029a5760206040516202a3008152f35b3461029a575f36600319011261029a575f546040516001600160a01b039091168152602090f35b503461029a57602036600319011261029a5761086f610eff565b5f549091906001600160a01b0316330361028c5761088c3661101d565b90815f5260066020526001600160401b0360405f205416801561027957804210610263576108c16001600160401b0391610fb1565b1680421161024d5750815f52600660205260405f206001600160401b0319815416905563ffffffff60e01b16905f5160206111a65f395f51905f525f80a36001600160a01b0316801561094657600380546001600160a01b031916821790557f6bb7ff33e730289800c62ad882105a144a74010d2bdbb9a942544a3005ad55bf5f80a2005b63a6c1146b60e01b5f5260045ffd5b3461029a5761096336610f15565b5f549091906001600160a01b0316330361028c57600482106106375780356001600160e01b0319169163f2fde38b60e01b83148015610aaa575b8015610a9a575b8015610a8a575b15610a77576109b991611094565b90815f5260066020526001600160401b0360405f205416610a64576202a30042018042116103cc576001600160401b031690825f52600660205260405f206001600160401b0383166001600160401b0319825416179055827f9823bc7236695e2e2737e578bb77ed7e8c1b677bdbec809d0b18378e33b5a7296040610a3d85610fb1565b6001600160401b03825191878352166020820152a360408051928352602083019190915290f35b50635d62906f60e11b5f5260045260245ffd5b8263e579df2760e01b5f5260045260245ffd5b506321c630e960e01b83146109ab565b50634506d62560e11b83146109a4565b5063f5770b1f60e01b831461099d565b3461029a57602036600319011261029a576001600160a01b03610adb610eff565b165f52600460205260206001600160401b0360405f205416604051908152f35b3461029a575f36600319011261029a576001546001600160a01b038116330361028c576001600160401b038160a01c168015610b9e57804211610b8c57505f80546001600160a01b031981163390811783556001600160e01b03199093166001556001600160a01b0316907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09080a3005b638a897a5d60e01b5f5260045260245ffd5b63357a03ed60e21b5f5260045ffd5b3461029a57602036600319011261029a576001600160a01b03610bce610eff565b165f526005602052602060ff60405f2054166040519015158152f35b3461029a576020610c03610bfd36610f15565b90611094565b604051908152f35b3461029a57602036600319011261029a576001600160a01b03610c2c610eff565b1680151580610c69575b80610c49575b6020906040519015158152f35b505f52600460205260206001600160401b0360405f205416421115610c3c565b50805f52600560205260ff60405f20541615610c36565b3461029a57602036600319011261029a57610c99610eff565b5f546001600160a01b031633141580610d16575b61048e576001600160a01b03168015610d0757805f52600560205260405f20600160ff1982541617905560405190600182527fa78b99bd80fc033e23de08079ca930723b61d50eb510214046cb473e4865fe2e60203393a3005b630da30f6560e31b5f5260045ffd5b506003546001600160a01b0316331415610cad565b3461029a575f36600319011261029a57602060405162278d008152f35b3461029a575f36600319011261029a576003546040516001600160a01b039091168152602090f35b3461029a575f36600319011261029a576003546001600160a01b0316330361048e57610d9a6110f8565b005b3461029a575f36600319011261029a575f546001600160a01b0316330361028c57610d9a6110f8565b503461029a57602036600319011261029a57610ddf610eff565b5f546001600160a01b0316330361028c57610df93661101d565b805f5260066020526001600160401b0360405f2054168015610eec57804210610ed657610e2d6001600160401b0391610fb1565b16804211610ec057505f81815260066020526040808220805467ffffffffffffffff1916905551936001600160e01b03191691905f5160206111a65f395f51905f529080a36001600160a01b03168015610d0757805f52600560205260405f2060ff1981541690555f82527fa78b99bd80fc033e23de08079ca930723b61d50eb510214046cb473e4865fe2e60203393a3005b906372ec6fe960e01b5f5260045260245260445ffd5b9063445de55160e11b5f5260045260245260445ffd5b5063a3fa30d160e01b5f5260045260245ffd5b600435906001600160a01b038216820361029a57565b90602060031983011261029a576004356001600160401b03811161029a578260238201121561029a578060040135926001600160401b03841161029a576024848301011161029a576024019190565b3461029a575f36600319011261029a57602060405162093a808152f35b9181601f8401121561029a578235916001600160401b03831161029a576020808501948460051b01011161029a57565b6001600160401b0362093a80911601906001600160401b0382116103cc57565b9190811015610fe15760051b0190565b634e487b7160e01b5f52603260045260245ffd5b356001600160a01b038116810361029a5790565b356001600160401b038116810361029a5790565b60405160a0816020810193468552306040830152606080830152806080830152805f848401375f838284010152601f801991011681010301601f1981018252601f801991011681018181106001600160401b038211176110805760405251902090565b634e487b7160e01b5f52604160045260245ffd5b9060a06040518281936020830195468752306040850152606080850152816080850152848401375f838284010152601f801991011681010301601f1981018252601f801991011681018181106001600160401b038211176110805760405251902090565b6001546001600160a01b038116908115610b9e576001600160e01b0319166001555f80546001600160a01b0316907fe83a760af9d3c86797ea13c8979010086f067cfe3c985b2d03d951248600c50f9080a3565b6001600160a01b031615610d07576001600160401b031680156111a25742811180159061118d575b61117b5750565b6380da8ccd60e01b5f5260045260245ffd5b5062278d0042018042116103cc578111611174565b5056fe6d58d6692c790c30285a53d333a6886d776e561aac61df2eb3d295a260a9870fa164736f6c634300081e000a",
+  "deployedBytecode": "0x60806040526004361015610011575f80fd5b5f358060e01c806321c630e914610dc557806323452b9c14610d9c5780632ed0ebae14610d70578063452a932014610d485780634634edce14610d2b5780636608452714610c8057806366e305fd14610c0b57806367e05a8614610bea57806379ac51f714610bad57806379ba509714610afb5780637cedebc514610aba57806384f98da1146109555780638a0dac4a146108555780638da5cb5b1461082e57806392ffacac14610811578063950bff9f146107f65780639c15c674146107cd5780639f857a101461079a578063aa3aa46014610760578063afebef97146106a6578063c622a401146103ef578063cada25c21461067e578063d48cdd94146104da578063e30c3978146104b2578063e829b083146103f4578063ed823a44146103ef578063f2fde38b1461029e5763f5770b1f1461014e575f80fd5b3461029a57602036600319011261029a57610167610eff565b5f549091906001600160a01b0316330361028c576101843661101d565b90815f5260066020526001600160401b0360405f205416801561027957804210610263576101b96001600160401b0391610fb1565b1680421161024d5750815f52600660205260405f206001600160401b0319815416905563ffffffff60e01b16905f5160206111a65f395f51905f525f80a36001600160a01b0316801561023e57600280546001600160a01b031916821790557fd5d99e381ae1a48ea1fe28325462987c8204869c61d1468101524f97d94400115f80a2005b63acec475360e01b5f5260045ffd5b826372ec6fe960e01b5f5260045260245260445ffd5b8263445de55160e11b5f5260045260245260445ffd5b8263a3fa30d160e01b5f5260045260245ffd5b6282b42960e81b5f5260045ffd5b5f80fd5b503461029a57602036600319011261029a576102b8610eff565b5f549091906001600160a01b0316330361028c576102d53661101d565b90815f5260066020526001600160401b0360405f2054168015610279578042106102635761030a6001600160401b0391610fb1565b1680421161024d5750815f52600660205260405f206001600160401b0319815416905563ffffffff60e01b16905f5160206111a65f395f51905f525f80a36001600160a01b031680156103e05760015462093a8042018042116103cc5782906001600160401b0360a01b9060a01b169163ffffffff60e01b161717806001557f7c731d56666267b8b57eeaddc598a7bad37f556bd84279432a730db8df1a2859602060018060a01b035f5416926001600160401b036040519160a01c168152a3005b634e487b7160e01b5f52601160045260245ffd5b63d92e233d60e01b5f5260045ffd5b610f64565b3461029a57602036600319011261029a5760043560018060a01b035f54163314158061049d575b61048e57805f5260066020526001600160401b0360405f2054161561047c57805f52600660205260405f206001600160401b0319815416905533907fe971a7ca7d6685bceb000248b83931e43a9786695dd69aa6b617c777d92a04a45f80a3005b63a3fa30d160e01b5f5260045260245ffd5b63089866cd60e01b5f5260045ffd5b506003546001600160a01b031633141561041b565b3461029a575f36600319011261029a576001546040516001600160a01b039091168152602090f35b3461029a57604036600319011261029a576004356001600160401b03811161029a5761050a903690600401610f81565b6024356001600160401b03811161029a57610529903690600401610f81565b9260018060a01b035f541633141580610669575b61065a5782158015610650575b8015610646575b610637575f5b83811061056057005b806105926105796105746001948887610fd1565b610ff5565b61058c610587848a89610fd1565b611009565b9061114c565b6105a0610587828887610fd1565b828060a01b036105b4610574848988610fd1565b165f5260046020526001600160401b0360405f2091166001600160401b03198254161790556105e7610574828786610fd1565b7f889d4fcf941f62f2ba58151906fdfcf690f9e7c76882c57b70a221cdfbd78d6a6020610618610587858b8a610fd1565b926001600160401b0360405194168452858060a01b031692a201610557565b6333b094a160e01b5f5260045ffd5b5083831415610551565b5060c8831161054a565b6304daaa1160e41b5f5260045ffd5b506002546001600160a01b031633141561053d565b3461029a575f36600319011261029a576002546040516001600160a01b039091168152602090f35b3461029a57604036600319011261029a576106bf610eff565b602435906001600160401b0382169182810361029a575f546001600160a01b03163314158061074b575b61065a578161071b6020927f889d4fcf941f62f2ba58151906fdfcf690f9e7c76882c57b70a221cdfbd78d6a9461114c565b6001600160a01b03165f81815260048352604090819020805467ffffffffffffffff1916861790555193845292a2005b506002546001600160a01b03163314156106e9565b3461029a575f36600319011261029a5760206040517f31ce7c3469dd0a4b21e90c5bf36dfcb8560d5de52d2865d311aa39280659dd268152f35b3461029a57602036600319011261029a576004355f52600660205260206001600160401b0360405f205416604051908152f35b3461029a575f36600319011261029a5760206001600160401b0360015460a01c16604051908152f35b3461029a575f36600319011261029a57602060405160c88152f35b3461029a575f36600319011261029a5760206040516202a3008152f35b3461029a575f36600319011261029a575f546040516001600160a01b039091168152602090f35b503461029a57602036600319011261029a5761086f610eff565b5f549091906001600160a01b0316330361028c5761088c3661101d565b90815f5260066020526001600160401b0360405f205416801561027957804210610263576108c16001600160401b0391610fb1565b1680421161024d5750815f52600660205260405f206001600160401b0319815416905563ffffffff60e01b16905f5160206111a65f395f51905f525f80a36001600160a01b0316801561094657600380546001600160a01b031916821790557f6bb7ff33e730289800c62ad882105a144a74010d2bdbb9a942544a3005ad55bf5f80a2005b63a6c1146b60e01b5f5260045ffd5b3461029a5761096336610f15565b5f549091906001600160a01b0316330361028c57600482106106375780356001600160e01b0319169163f2fde38b60e01b83148015610aaa575b8015610a9a575b8015610a8a575b15610a77576109b991611094565b90815f5260066020526001600160401b0360405f205416610a64576202a30042018042116103cc576001600160401b031690825f52600660205260405f206001600160401b0383166001600160401b0319825416179055827f9823bc7236695e2e2737e578bb77ed7e8c1b677bdbec809d0b18378e33b5a7296040610a3d85610fb1565b6001600160401b03825191878352166020820152a360408051928352602083019190915290f35b50635d62906f60e11b5f5260045260245ffd5b8263e579df2760e01b5f5260045260245ffd5b506321c630e960e01b83146109ab565b50634506d62560e11b83146109a4565b5063f5770b1f60e01b831461099d565b3461029a57602036600319011261029a576001600160a01b03610adb610eff565b165f52600460205260206001600160401b0360405f205416604051908152f35b3461029a575f36600319011261029a576001546001600160a01b038116330361028c576001600160401b038160a01c168015610b9e57804211610b8c57505f80546001600160a01b031981163390811783556001600160e01b03199093166001556001600160a01b0316907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e09080a3005b638a897a5d60e01b5f5260045260245ffd5b63357a03ed60e21b5f5260045ffd5b3461029a57602036600319011261029a576001600160a01b03610bce610eff565b165f526005602052602060ff60405f2054166040519015158152f35b3461029a576020610c03610bfd36610f15565b90611094565b604051908152f35b3461029a57602036600319011261029a576001600160a01b03610c2c610eff565b1680151580610c69575b80610c49575b6020906040519015158152f35b505f52600460205260206001600160401b0360405f205416421115610c3c565b50805f52600560205260ff60405f20541615610c36565b3461029a57602036600319011261029a57610c99610eff565b5f546001600160a01b031633141580610d16575b61048e576001600160a01b03168015610d0757805f52600560205260405f20600160ff1982541617905560405190600182527fa78b99bd80fc033e23de08079ca930723b61d50eb510214046cb473e4865fe2e60203393a3005b630da30f6560e31b5f5260045ffd5b506003546001600160a01b0316331415610cad565b3461029a575f36600319011261029a57602060405162278d008152f35b3461029a575f36600319011261029a576003546040516001600160a01b039091168152602090f35b3461029a575f36600319011261029a576003546001600160a01b0316330361048e57610d9a6110f8565b005b3461029a575f36600319011261029a575f546001600160a01b0316330361028c57610d9a6110f8565b503461029a57602036600319011261029a57610ddf610eff565b5f546001600160a01b0316330361028c57610df93661101d565b805f5260066020526001600160401b0360405f2054168015610eec57804210610ed657610e2d6001600160401b0391610fb1565b16804211610ec057505f81815260066020526040808220805467ffffffffffffffff1916905551936001600160e01b03191691905f5160206111a65f395f51905f529080a36001600160a01b03168015610d0757805f52600560205260405f2060ff1981541690555f82527fa78b99bd80fc033e23de08079ca930723b61d50eb510214046cb473e4865fe2e60203393a3005b906372ec6fe960e01b5f5260045260245260445ffd5b9063445de55160e11b5f5260045260245260445ffd5b5063a3fa30d160e01b5f5260045260245ffd5b600435906001600160a01b038216820361029a57565b90602060031983011261029a576004356001600160401b03811161029a578260238201121561029a578060040135926001600160401b03841161029a576024848301011161029a576024019190565b3461029a575f36600319011261029a57602060405162093a808152f35b9181601f8401121561029a578235916001600160401b03831161029a576020808501948460051b01011161029a57565b6001600160401b0362093a80911601906001600160401b0382116103cc57565b9190811015610fe15760051b0190565b634e487b7160e01b5f52603260045260245ffd5b356001600160a01b038116810361029a5790565b356001600160401b038116810361029a5790565b60405160a0816020810193468552306040830152606080830152806080830152805f848401375f838284010152601f801991011681010301601f1981018252601f801991011681018181106001600160401b038211176110805760405251902090565b634e487b7160e01b5f52604160045260245ffd5b9060a06040518281936020830195468752306040850152606080850152816080850152848401375f838284010152601f801991011681010301601f1981018252601f801991011681018181106001600160401b038211176110805760405251902090565b6001546001600160a01b038116908115610b9e576001600160e01b0319166001555f80546001600160a01b0316907fe83a760af9d3c86797ea13c8979010086f067cfe3c985b2d03d951248600c50f9080a3565b6001600160a01b031615610d07576001600160401b031680156111a25742811180159061118d575b61117b5750565b6380da8ccd60e01b5f5260045260245ffd5b5062278d0042018042116103cc578111611174565b5056fe6d58d6692c790c30285a53d333a6886d776e561aac61df2eb3d295a260a9870fa164736f6c634300081e000a",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.30+commit.73712a01"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "initialOwner",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "initialAttestor",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "initialGuardian",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "constructor"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            }
+          ],
+          "name": "AdminActionAlreadyScheduled",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "expiresAt",
+              "type": "uint64"
+            }
+          ],
+          "name": "AdminActionExpired",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes4",
+              "name": "selector",
+              "type": "bytes4"
+            }
+          ],
+          "name": "AdminActionNotAllowed",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "readyAt",
+              "type": "uint64"
+            }
+          ],
+          "name": "AdminActionNotReady",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            }
+          ],
+          "name": "AdminActionNotScheduled",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "InvalidAccount",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "InvalidAttestor",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "InvalidBatch",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint64",
+              "name": "validUntil",
+              "type": "uint64"
+            }
+          ],
+          "name": "InvalidEligibilityExpiry",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "InvalidGuardian",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "NoPendingTransfer",
+          "type": "error"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "uint64",
+              "name": "expiresAt",
+              "type": "uint64"
+            }
+          ],
+          "name": "PendingTransferExpired",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "Unauthorized",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "UnauthorizedAttestor",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "UnauthorizedGuardian",
+          "type": "error"
+        },
+        {
+          "inputs": [],
+          "name": "ZeroAddress",
+          "type": "error"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "caller",
+              "type": "address"
+            }
+          ],
+          "name": "AdminActionCanceled",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "bytes4",
+              "name": "selector",
+              "type": "bytes4"
+            }
+          ],
+          "name": "AdminActionExecuted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            },
+            {
+              "indexed": true,
+              "internalType": "bytes4",
+              "name": "selector",
+              "type": "bytes4"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint64",
+              "name": "readyAt",
+              "type": "uint64"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint64",
+              "name": "expiresAt",
+              "type": "uint64"
+            }
+          ],
+          "name": "AdminActionScheduled",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "attestor",
+              "type": "address"
+            }
+          ],
+          "name": "AttestorUpdated",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint64",
+              "name": "validUntil",
+              "type": "uint64"
+            }
+          ],
+          "name": "EligibilityUpdated",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "bool",
+              "name": "denied",
+              "type": "bool"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "caller",
+              "type": "address"
+            }
+          ],
+          "name": "EmergencyDenialUpdated",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "guardian",
+              "type": "address"
+            }
+          ],
+          "name": "GuardianUpdated",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "currentOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "canceledOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferCanceled",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "currentOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "pendingOwner",
+              "type": "address"
+            },
+            {
+              "indexed": false,
+              "internalType": "uint64",
+              "name": "expiresAt",
+              "type": "uint64"
+            }
+          ],
+          "name": "OwnershipTransferStarted",
+          "type": "event"
+        },
+        {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event"
+        },
+        {
+          "inputs": [],
+          "name": "ADMIN_DELAY",
+          "outputs": [
+            {
+              "internalType": "uint64",
+              "name": "",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "ADMIN_EXECUTION_GRACE",
+          "outputs": [
+            {
+              "internalType": "uint64",
+              "name": "",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MAX_BATCH",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "MAX_ELIGIBILITY_DURATION",
+          "outputs": [
+            {
+              "internalType": "uint64",
+              "name": "",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "OWNERSHIP_ACCEPTANCE_WINDOW",
+          "outputs": [
+            {
+              "internalType": "uint64",
+              "name": "",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "PROTOCOL_VERSION",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "acceptOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "callData",
+              "type": "bytes"
+            }
+          ],
+          "name": "adminActionId",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "",
+              "type": "bytes32"
+            }
+          ],
+          "name": "adminActionReadyAt",
+          "outputs": [
+            {
+              "internalType": "uint64",
+              "name": "",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "attestor",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            }
+          ],
+          "name": "cancelAdminAction",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "cancelOwnershipTransfer",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "clearEmergencyDeny",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "eligibleUntil",
+          "outputs": [
+            {
+              "internalType": "uint64",
+              "name": "",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "name": "emergencyDenied",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "emergencyDeny",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "guardian",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "guardianCancelOwnershipTransfer",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            }
+          ],
+          "name": "isEligible",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "owner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "pendingOwner",
+          "outputs": [
+            {
+              "internalType": "address",
+              "name": "",
+              "type": "address"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [],
+          "name": "pendingOwnerExpiresAt",
+          "outputs": [
+            {
+              "internalType": "uint64",
+              "name": "",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes",
+              "name": "callData",
+              "type": "bytes"
+            }
+          ],
+          "name": "scheduleAdminAction",
+          "outputs": [
+            {
+              "internalType": "bytes32",
+              "name": "actionId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "uint64",
+              "name": "readyAt",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newAttestor",
+              "type": "address"
+            }
+          ],
+          "name": "setAttestor",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address"
+            },
+            {
+              "internalType": "uint64",
+              "name": "validUntil",
+              "type": "uint64"
+            }
+          ],
+          "name": "setEligibility",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address[]",
+              "name": "accounts",
+              "type": "address[]"
+            },
+            {
+              "internalType": "uint64[]",
+              "name": "validUntil",
+              "type": "uint64[]"
+            }
+          ],
+          "name": "setEligibilityBatch",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "newGuardian",
+              "type": "address"
+            }
+          ],
+          "name": "setGuardian",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "nextOwner",
+              "type": "address"
+            }
+          ],
+          "name": "transferOwnership",
+          "outputs": [],
+          "stateMutability": "nonpayable",
+          "type": "function"
+        }
+      ],
+      "devdoc": {
+        "details": "Stores only wallet and expiry. Sensitive identity and screening evidence remain off-chain.      Recovery actions are delayed and guardian-cancelable; emergency denials remain immediate.",
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "notice": "On-chain eligibility cache for an external KYC/sanctions decision service.",
+        "version": 1
+      }
+    },
+    "settings": {
+      "compilationTarget": {
+        "src/AttestedEligibilityGate.sol": "AttestedEligibilityGate"
+      },
+      "evmVersion": "shanghai",
+      "libraries": {},
+      "metadata": {
+        "bytecodeHash": "none"
+      },
+      "optimizer": {
+        "enabled": true,
+        "runs": 100
+      },
+      "remappings": [],
+      "viaIR": true
+    },
+    "sources": {
+      "src/AttestedEligibilityGate.sol": {
+        "keccak256": "0x50361d1cfb749be03e0f9dfcfadbb07b663d68fc0999bd9bf6208019ac2de5ef",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://d7a10d70f97e207e75a7613acaf7b6bcb66dfcf88697e3f627d692b0a2237e4e",
+          "dweb:/ipfs/QmZ97FuDRgzUDtJPCxMuXuxUWpWNMujwFp3dP2kAouXF6X"
+        ]
+      },
+      "src/interfaces/IEligibilityGate.sol": {
+        "keccak256": "0x505e34e65d9ba5b618d3771a8d9583b648c877baa777ced099807d19b366af72",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://1ff14c30778c818eb85bf53d339c7447210406c7ca4cd52ccc18cd9c22307aea",
+          "dweb:/ipfs/QmNZQ2doAybqPWdqhoG6GCERg3oY2pzDmDhUFtuL25yVTd"
+        ]
+      },
+      "src/utils/TwoStepAdmin.sol": {
+        "keccak256": "0x6b6456c34450ba9379e1f1734578e8b278daacd7b09fb6a0ceafc7b2fc479e88",
+        "license": "MIT",
+        "urls": [
+          "bzz-raw://af8bca98a8b6d1e349292666c4dcf55faa8317a9da54ac64d3fa922e5ee6b4aa",
+          "dweb:/ipfs/QmNoxxnxeRLdZhMsV6Ln1VEQbU51KKHSzRnGmovUVhqFgt"
+        ]
+      }
+    },
+    "version": 1
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/account-abstraction-policy.schema.json",
+  "title": "Bounded Robinhood account-abstraction policy",
+  "type": "object",
+  "required": ["version", "entryPointVersion", "userSignatureRequired", "privateKeyStorageAllowed", "session"],
+  "properties": {
+    "version": { "const": "1.0" },
+    "entryPointVersion": { "enum": ["0.6", "0.7", "0.8"] },
+    "userSignatureRequired": { "const": true },
+    "privateKeyStorageAllowed": { "const": false },
+    "session": {
+      "type": "object",
+      "required": ["enabled", "expiresAt", "allowedTargets", "allowedSelectors", "maxValuePerCall", "maxTotalValue"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "expiresAt": { "type": ["string", "null"], "format": "date-time" },
+        "allowedTargets": { "type": "array", "items": { "type": "string", "pattern": "^0x[0-9a-fA-F]{40}$" } },
+        "allowedSelectors": { "type": "array", "items": { "type": "string", "pattern": "^0x[0-9a-fA-F]{8}$" } },
+        "maxValuePerCall": { "type": "string", "pattern": "^[0-9]+$" },
+        "maxTotalValue": { "type": "string", "pattern": "^[0-9]+$" }
+      }
+    }
+  }
+}

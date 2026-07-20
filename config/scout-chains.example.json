@@ -1,0 +1,128 @@
+[
+  {
+    "enabled": true,
+    "chainId": 4663,
+    "name": "Robinhood Chain Mainnet",
+    "rpcUrls": [
+      "https://rpc.mainnet.chain.robinhood.com"
+    ],
+    "explorerUrl": "https://robinhoodchain.blockscout.com",
+    "startBlock": null,
+    "confirmations": 2,
+    "expectedBlockTimeMs": 2000,
+    "stallAfterMs": 60000,
+    "nativeCurrencyName": "Ether",
+    "nativeCurrencySymbol": "ETH"
+  },
+  {
+    "enabled": false,
+    "chainId": 46630,
+    "name": "Robinhood Chain Testnet",
+    "rpcUrls": [
+      "https://rpc.testnet.chain.robinhood.com"
+    ],
+    "explorerUrl": "https://explorer.testnet.chain.robinhood.com",
+    "startBlock": null,
+    "confirmations": 1,
+    "expectedBlockTimeMs": 2000,
+    "stallAfterMs": 60000,
+    "nativeCurrencyName": "Test Ether",
+    "nativeCurrencySymbol": "ETH"
+  },
+  {
+    "enabled": false,
+    "chainId": 1,
+    "name": "Ethereum Mainnet",
+    "rpcUrls": [
+      "https://dedicated-ethereum-archive.example/rpc"
+    ],
+    "wsUrl": "wss://dedicated-ethereum-archive.example/ws",
+    "explorerUrl": "https://etherscan.io",
+    "startBlock": 0,
+    "confirmations": 12,
+    "expectedBlockTimeMs": 12000,
+    "stallAfterMs": 180000,
+    "nativeCurrencyName": "Ether",
+    "nativeCurrencySymbol": "ETH"
+  },
+  {
+    "enabled": false,
+    "chainId": 8453,
+    "name": "Base Mainnet",
+    "rpcUrls": [
+      "https://dedicated-base-archive.example/rpc"
+    ],
+    "wsUrl": "wss://dedicated-base-archive.example/ws",
+    "explorerUrl": "https://basescan.org",
+    "startBlock": 0,
+    "confirmations": 4,
+    "expectedBlockTimeMs": 2000,
+    "stallAfterMs": 60000,
+    "nativeCurrencyName": "Ether",
+    "nativeCurrencySymbol": "ETH"
+  },
+  {
+    "enabled": false,
+    "chainId": 42161,
+    "name": "Arbitrum One",
+    "rpcUrls": [
+      "https://dedicated-arbitrum-archive.example/rpc"
+    ],
+    "wsUrl": "wss://dedicated-arbitrum-archive.example/ws",
+    "explorerUrl": "https://arbiscan.io",
+    "startBlock": 0,
+    "confirmations": 20,
+    "expectedBlockTimeMs": 250,
+    "stallAfterMs": 30000,
+    "nativeCurrencyName": "Ether",
+    "nativeCurrencySymbol": "ETH"
+  },
+  {
+    "enabled": false,
+    "chainId": 10,
+    "name": "OP Mainnet",
+    "rpcUrls": [
+      "https://dedicated-optimism-archive.example/rpc"
+    ],
+    "wsUrl": "wss://dedicated-optimism-archive.example/ws",
+    "explorerUrl": "https://optimistic.etherscan.io",
+    "startBlock": 0,
+    "confirmations": 20,
+    "expectedBlockTimeMs": 2000,
+    "stallAfterMs": 60000,
+    "nativeCurrencyName": "Ether",
+    "nativeCurrencySymbol": "ETH"
+  },
+  {
+    "enabled": false,
+    "chainId": 137,
+    "name": "Polygon PoS",
+    "rpcUrls": [
+      "https://dedicated-polygon-archive.example/rpc"
+    ],
+    "wsUrl": "wss://dedicated-polygon-archive.example/ws",
+    "explorerUrl": "https://polygonscan.com",
+    "startBlock": 0,
+    "confirmations": 128,
+    "expectedBlockTimeMs": 2000,
+    "stallAfterMs": 90000,
+    "nativeCurrencyName": "POL",
+    "nativeCurrencySymbol": "POL"
+  },
+  {
+    "enabled": false,
+    "chainId": 56,
+    "name": "BNB Smart Chain",
+    "rpcUrls": [
+      "https://dedicated-bsc-archive.example/rpc"
+    ],
+    "wsUrl": "wss://dedicated-bsc-archive.example/ws",
+    "explorerUrl": "https://bscscan.com",
+    "startBlock": 0,
+    "confirmations": 15,
+    "expectedBlockTimeMs": 3000,
+    "stallAfterMs": 90000,
+    "nativeCurrencyName": "BNB",
+    "nativeCurrencySymbol": "BNB"
+  }
+]

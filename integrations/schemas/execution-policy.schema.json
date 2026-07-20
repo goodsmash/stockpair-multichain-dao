@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/execution-policy.schema.json",
+  "title": "StockPair Guarded Execution Policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["mode", "enabled"],
+  "properties": {
+    "mode": { "enum": ["review-only", "user-signed", "session-key"] },
+    "enabled": { "type": "boolean" },
+    "requireSimulation": { "type": "boolean", "default": true },
+    "requireDirectChainRefresh": { "type": "boolean", "default": true },
+    "requireVerifiedFactory": { "type": "boolean", "default": true },
+    "maxRiskScore": { "type": "number", "minimum": 0, "maximum": 100 },
+    "maxSlippageBps": { "type": "integer", "minimum": 1, "maximum": 300 },
+    "maxPositionBps": { "type": "integer", "minimum": 1, "maximum": 500 },
+    "maxDailySpend": { "type": "string", "pattern": "^[0-9]+$" },
+    "cooldownSeconds": { "type": "integer", "minimum": 0, "maximum": 86400 },
+    "minLiquidity": { "type": "string", "pattern": "^[0-9]+$" },
+    "allowedChainIds": { "type": "array", "maxItems": 32, "items": { "type": "integer", "minimum": 1 }, "uniqueItems": true }
+  }
+}

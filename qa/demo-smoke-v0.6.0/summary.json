@@ -1,0 +1,56 @@
+{
+  "release": "0.6.0",
+  "recordedAt": "2026-07-19T18:06:10.536Z",
+  "localOnly": true,
+  "disposableDemoAcknowledgement": true,
+  "chainId": 31337,
+  "services": {
+    "evm": {
+      "ok": true,
+      "url": "http://127.0.0.1:8545"
+    },
+    "indexer": {
+      "ok": true,
+      "version": "0.6.0",
+      "url": "http://127.0.0.1:8787"
+    },
+    "uiHttp": {
+      "ok": true,
+      "url": "http://127.0.0.1:5173"
+    },
+    "sse": {
+      "ok": true,
+      "contentType": "text/event-stream"
+    }
+  },
+  "trust": {
+    "configured": true,
+    "trusted": true,
+    "factoryAddress": "0x254dffcd3277C0b1660F6d42EFbB754edaBAbC2B",
+    "actualCodeHash": "0xb18155738639f87a2f1c8810ed3ba346c5e877c01c41b6530d246ae90ecb2bb3",
+    "expectedCodeHash": "0xb18155738639f87a2f1c8810ed3ba346c5e877c01c41b6530d246ae90ecb2bb3",
+    "codeHashMatches": true,
+    "protocolVersion": "0x154b42508933d53fbe3cac1f7e0e8ccf4a36169ed150f9171e2fae441e220309",
+    "expectedProtocolVersion": "0x154b42508933d53fbe3cac1f7e0e8ccf4a36169ed150f9171e2fae441e220309",
+    "versionMatches": true
+  },
+  "indexed": {
+    "launches": 1,
+    "contracts": 4,
+    "tokens": 1,
+    "pools": 0,
+    "deployers": 1,
+    "scoutRunning": true
+  },
+  "securityHeaders": {
+    "sseNoSniff": true,
+    "sseFrameDeny": true,
+    "sseNoCache": true,
+    "sseCrossOriginResourcePolicy": true,
+    "apiVersion": true
+  },
+  "browserVisualCapture": {
+    "executed": false,
+    "reason": "Managed Chromium policy in this execution environment blocked all localhost, private-network, and file URL navigation before the application loaded. Static UI contracts and HTTP delivery passed; no screenshot or browser-console pass is claimed."
+  }
+}

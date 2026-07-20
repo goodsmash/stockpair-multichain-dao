@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://stockpair.example/schemas/robinhood-network-registry.schema.json",
+  "title": "Robinhood Chain reviewed network registry",
+  "type": "object",
+  "required": ["schemaVersion", "reviewedAt", "networks", "precompiles", "stockTokens", "documentation"],
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "reviewedAt": { "type": "string", "format": "date" },
+    "networks": {
+      "type": "object",
+      "required": ["4663", "46630"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["chainId", "name", "environment", "nativeCurrency", "explorerUrl", "publicRpcUrl", "sequencerFeedUrl", "contracts", "accountAbstraction"],
+        "properties": {
+          "chainId": { "type": "integer", "minimum": 1 },
+          "environment": { "enum": ["mainnet", "testnet"] },
+          "explorerUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "publicRpcUrl": { "type": "string", "format": "uri", "pattern": "^https://" },
+          "sequencerFeedUrl": { "type": "string", "format": "uri", "pattern": "^wss://" }
+        }
+      }
+    }
+  }
+}
