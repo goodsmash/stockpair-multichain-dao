@@ -8,7 +8,7 @@
     "test": "node --test ../../scripts/indexer-security.test.mjs"
   },
   "dependencies": {
-    "viem": "2.55.2"
+    "viem": "2.55.4"
   },
   "engines": {
     "node": ">=22.12 <23",
