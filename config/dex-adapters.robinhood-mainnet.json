@@ -1,0 +1,17 @@
+{
+  "adapters": [
+    {
+      "id": "rh-uniswap-v3",
+      "name": "Uniswap V3 (Robinhood)",
+      "kind": "uniswap-v3",
+      "chainId": 4663,
+      "factory": "0x1F98431c8aD98523631AE4a59f267346ea31F984",
+      "router": "0xE592427A0AEce92De3Edee1F18E0157C05861564",
+      "quoter": "0x61fFE014bA17989E743c5F6cB21bF9697530B21e",
+      "wrappedNative": "0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73",
+      "factoryCodeHash": "0x50a5be3beecbcb31943782a61e8779108ddca9c2610bc470108f4d84ca9d07cb",
+      "routerCodeHash": "0x53de07e4b07ac8eb8995c3fb0cf7ce787d73130ce85103089303a82e5e5ae57b",
+      "wrappedNativeCodeHash": "0xeb5a5f69ebb602e71cdf5fdeb7d49ca9e4b37d105432c0cbd31a754fc4d360a7"
+    }
+  ]
+}

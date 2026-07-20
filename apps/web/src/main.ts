@@ -26,7 +26,7 @@ declare global {
   interface Window { ethereum?: EIP1193Provider }
 }
 
-type View = 'discover' | 'scout' | 'dao' | 'robinhood' | 'trade' | 'launch' | 'portfolio' | 'scanner' | 'activity' | 'settings' | 'admin'
+type View = 'discover' | 'scout' | 'dao' | 'robinhood' | 'trade' | 'launch' | 'portfolio' | 'scanner' | 'pump' | 'activity' | 'settings' | 'admin'
 type RiskStatus = 'TRUSTED' | 'LOW' | 'CAUTION' | 'DANGER' | 'BLOCKED'
 
 type LaunchView = {
@@ -581,6 +581,7 @@ app.innerHTML = `
         ${navButton('scout', '◉', 'Chain Scout')}
         ${navButton('dao', 'DAO', 'DAO Intelligence')}
         ${navButton('scanner', '⌾', 'Risk Scanner')}
+        ${navButton('pump', '🚀', 'Pump.fun')}
         ${navButton('activity', '≋', 'Activity')}
         ${navButton('robinhood', 'R', 'Robinhood Native')}
         <span class="nav-label">System</span>
@@ -1063,6 +1064,7 @@ const pageMeta: Record<View, { group: string; title: string }> = {
   scout: { group: 'Intelligence', title: 'Chain Scout' },
   dao: { group: 'Intelligence', title: 'DAO Intelligence' },
   scanner: { group: 'Intelligence', title: 'Risk Scanner' },
+  pump: { group: 'Intelligence', title: 'Pump.fun' },
   activity: { group: 'Intelligence', title: 'Activity' },
   robinhood: { group: 'Intelligence', title: 'Robinhood Native' },
   settings: { group: 'System', title: 'Settings' },
@@ -1444,6 +1446,19 @@ function renderScanner(): string {
     <div id="scan-root">${multiChainScanResult ? renderMultiChainScan(multiChainScanResult) : scanResult ? scanReport(scanResult) : `<section class="scan-grid"><article class="card-surface"><h3>Runtime and control</h3><p>Code hash, privileged selectors, EIP-1967 slots, ownership, pause controls and bytecode families.</p></article><article class="card-surface"><h3>Market and provenance</h3><p>Verified configured pools, current reserves/liquidity, swaps, deployer history and public source/holder evidence.</p></article><article class="card-surface"><h3>DAO intelligence</h3><p>Governor, timelock, votes and multisig fingerprints plus activity-based dormant-candidate scoring.</p></article></section>`}</div>`
 }
 
+function renderPump(): string {
+  return `
+    ${pageHeader('Solana memecoin discovery', 'Pump.fun Scanner', 'Track newly launched tokens on Solana via the Pump.fun API. Filter real launches vs bundler spam, watch bonding-curve progress, and jump to the token page. Cross-chain priority remains Robinhood Chain new deployments.', '<button class="button primary" data-go="scout">← Back to Robinhood Scout</button>')}
+    <section class="scanner-hero card-surface"><div><span class="eyebrow">Live Solana · Pump.fun API</span><h2>New Solana launches.</h2><p>Real-time feed of fresh Pump.fun tokens. We separate genuine launches (organic bonding, real holders) from bundler/bot spam using on-chain signal heuristics.</p></div>
+    <form id="pump-form" onsubmit="return false;">
+      <select id="pump-sort"><option value="created">Newest</option><option value="market_cap">Top market cap</option><option value="last_trade">Last trade</option><option value="bonding">Bonding progress</option></select>
+      <label class="checkbox"><input type="checkbox" id="pump-filter-real" checked> Hide bundler spam</label>
+      <button class="button primary" id="pump-refresh" type="button">Refresh feed</button>
+    </form></section>
+    <div id="pump-root"><p class="muted">Loading latest Pump.fun launches…</p></div>
+    <div class="callout warning">Pump.fun data is provided by the unofficial frontend API (research/educational). Always verify on Solana explorer before any interaction. This view is read-only discovery — no wallet connection or trading.</div>`
+}
+
 function scanReport(result: ScanResult): string {
   const intelligence = result.intelligence
   const market = result.market
@@ -1568,7 +1583,7 @@ function renderAdmin(): string {
 
 function renderView() {
   const root = document.querySelector<HTMLElement>('#view-root')!
-  const renderers: Record<View, () => string> = { discover: renderDiscover, scout: renderScout, dao: renderDao, robinhood: renderRobinhood, trade: renderTrade, launch: renderLaunch, portfolio: renderPortfolio, scanner: renderScanner, activity: renderActivity, settings: renderSettings, admin: renderAdmin }
+  const renderers: Record<View, () => string> = { discover: renderDiscover, scout: renderScout, dao: renderDao, robinhood: renderRobinhood, trade: renderTrade, launch: renderLaunch, portfolio: renderPortfolio, scanner: renderScanner, pump: renderPump, activity: renderActivity, settings: renderSettings, admin: renderAdmin }
   root.innerHTML = renderers[activeView]()
   bindViewEvents()
   if (activeView === 'portfolio' && account) void loadPortfolio()
@@ -1690,6 +1705,8 @@ function bindViewEvents() {
   document.querySelector('#reset-local-data')?.addEventListener('click', () => { for (const key of ['stockpair-watchlist','stockpair-theme','stockpair-quick-buy-eth','stockpair-max-buy-eth','stockpair-quick-buy-confirmations','stockpair-launch-notifications','stockpair-seen-contracts']) localStorage.removeItem(key); watchlist.clear(); toast('Local StockPair data reset', 'success'); renderView() })
   document.querySelector('#copy-security-checklist')?.addEventListener('click', () => void copyText(`Security report checklist:\n- Chain ID\n- Transaction hash(es)\n- Affected wallet and contract addresses\n- Exact timestamp and timezone\n- Browser build/version\n- Screenshots or wallet prompts\n- Whether approvals were granted\n- Any DNS/CDN or repository alerts`, 'Evidence checklist copied'))
   document.querySelectorAll<HTMLElement>('[data-doc-link]').forEach((link) => link.addEventListener('click', (event) => { event.preventDefault(); toast('Open this guide from the repository docs folder.', 'info') }))
+  if (activeView === 'pump') void loadPumpFeed()
+  document.querySelector('#pump-refresh')?.addEventListener('click', () => void loadPumpFeed())
 }
 
 async function runNativeForm(event: SubmitEvent, label: string, pathBuilder: (form: HTMLFormElement) => string) {
@@ -2385,6 +2402,82 @@ if (window.ethereum) {
     renderView()
   })
   window.ethereum.on?.('chainChanged', () => window.location.reload())
+}
+
+
+// ─── Pump.fun (Solana) scanner ───────────────────────────────
+type PumpToken = {
+  mint: string; name: string; symbol: string; image: string | null
+  marketCap: number; price: number; bondingCurveProgress: number; createdAt: number
+  virtualSolReserves: number; virtualTokenReserves: number; holderCount?: number
+  usdMarketCap?: number; lastTrade: number; spam: boolean
+}
+
+const PUMP_API = 'https://frontend-api-v3.pump.fun/coins'
+let pumpTokens: PumpToken[] = []
+
+async function loadPumpFeed(): Promise<void> {
+  const root = document.querySelector<HTMLElement>('#pump-root')
+  if (root) root.innerHTML = '<p class="muted">Loading latest Pump.fun launches…</p>'
+  try {
+    const res = await fetch(`${PUMP_API}/latest?limit=50&offset=0`, { headers: { Accept: 'application/json', Origin: 'https://pump.fun' } })
+    if (!res.ok) throw new Error(`Pump.fun API ${res.status}`)
+    const data = await res.json()
+    const raw: any[] = Array.isArray(data) ? data : (data?.coins ?? data?.items ?? [])
+    pumpTokens = raw.map((c: any) => {
+      const mcap = Number(c.usd_market_cap ?? c.marketCap ?? 0)
+      const progress = Number(c.bonding_curve_progress ?? c.completeProgress ?? 0)
+      const created = Number(c.created_timestamp ?? c.createdAt ?? 0)
+      const spam = mcap < 3000 || progress < 2 || (c.num_holders ?? 0) < 5
+      return {
+        mint: c.mint ?? c.address ?? '', name: c.name ?? 'Unknown', symbol: c.symbol ?? '?',
+        image: c.image ?? null, marketCap: mcap, price: Number(c.price ?? 0),
+        bondingCurveProgress: progress, createdAt: created, holderCount: Number(c.num_holders ?? 0),
+        virtualSolReserves: Number(c.virtual_sol_reserves ?? 0), virtualTokenReserves: Number(c.virtual_token_reserves ?? 0),
+        lastTrade: Number(c.last_trade ?? 0), spam
+      }
+    })
+    renderPumpFeed()
+  } catch (error) {
+    if (root) root.innerHTML = `<div class="callout error">Pump.fun feed unavailable: ${escapeHtml(errorMessage(error))}. The unofficial API may rate-limit or block browser CORS. Try again shortly.</div>`
+  }
+}
+
+function renderPumpFeed(): void {
+  const root = document.querySelector<HTMLElement>('#pump-root')
+  if (!root) return
+  const filterReal = (document.querySelector<HTMLInputElement>('#pump-filter-real')?.checked ?? true)
+  const sortBy = document.querySelector<HTMLSelectElement>('#pump-sort')?.value ?? 'created'
+  let list = pumpTokens.slice()
+  if (filterReal) list = list.filter((t) => !t.spam)
+  list.sort((a, b) => {
+    switch (sortBy) {
+      case 'market_cap': return b.marketCap - a.marketCap
+      case 'last_trade': return b.lastTrade - a.lastTrade
+      case 'bonding': return b.bondingCurveProgress - a.bondingCurveProgress
+      default: return b.createdAt - a.createdAt
+    }
+  })
+  if (!list.length) { root.innerHTML = '<p class="muted">No tokens match the current filter.</p>'; return }
+  root.innerHTML = `<div class="pump-grid">${list.map(renderPumpCard).join('')}</div>`
+}
+
+function renderPumpCard(t: PumpToken): string {
+  const ageMin = t.createdAt ? Math.max(0, Math.floor((Date.now() - t.createdAt) / 60000)) : 0
+  const age = ageMin < 60 ? `${ageMin}m` : `${Math.floor(ageMin / 60)}h`
+  const mcap = t.marketCap > 0 ? `$${t.marketCap.toLocaleString(undefined, { maximumFractionDigits: 0 })}` : 'n/a'
+  const prog = t.bondingCurveProgress ? `${t.bondingCurveProgress.toFixed(1)}%` : '?'
+  return `<article class="pump-card card-surface ${t.spam ? 'spam' : ''}">
+    <div class="pump-head"><div class="pump-glyph">${t.image ? `<img src="${escapeAttr(t.image)}" alt="" loading="lazy">` : escapeHtml((t.symbol || '?').slice(0, 2))}</div>
+    <div class="grow"><div class="title-line"><h3>${escapeHtml(t.name)}</h3>${t.spam ? '<span class="status-chip fail">SPAM?</span>' : ''}</div><p>${escapeHtml(t.symbol)} · ${shortAddress(t.mint as any)}</p></div></div>
+    <dl class="mini-facts">
+      <div><dt>MCap</dt><dd>${mcap}</dd></div>
+      <div><dt>Bonding</dt><dd>${prog}</dd></div>
+      <div><dt>Holders</dt><dd>${t.holderCount ?? '?'}</dd></div>
+      <div><dt>Age</dt><dd>${age}</dd></div>
+    </dl>
+    <div class="card-actions"><a target="_blank" rel="noopener noreferrer" href="https://pump.fun/coin/${escapeAttr(t.mint)}">Pump.fun ↗</a><a target="_blank" rel="noopener noreferrer" href="https://solscan.io/token/${escapeAttr(t.mint)}">Solscan ↗</a></div>
+  </article>`
 }
 
 const initialHash = window.location.hash.slice(1) as View
